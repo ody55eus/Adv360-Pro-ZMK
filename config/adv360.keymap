@@ -16,73 +16,98 @@
           label = "HOMEROW_MODS";
           #binding-cells = <2>;
           tapping-term-ms = <200>;
-          quick_tap_ms = <175>;
-          flavor = "tap-preferred";
+          quick-tap-ms = <175>;
+          flavor = "hold-preferred";
           bindings = <&kp>, <&kp>;
       };
+
+      td0: tap_dance_0 {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp ESC>, <&mo 2>, <&mo 5>;
+        };
     };
 
   keymap {
     compatible = "zmk,keymap";
 
     default_layer {
-      display-name = "Base";
-      bindings = <
-        &kp EQUAL &kp N1    &kp N2   &kp N3   &kp N4     &kp N5 &tog 1                                                           &mo 3 &kp N6 &kp N7 &kp N8    &kp N9   &kp N0   &kp MINUS
-        &kp TAB   &kp Q     &kp W    &kp E    &kp R      &kp T  &none                                                            &none &kp Y  &kp U  &kp I     &kp O    &kp P    &kp BSLH
-        &kp ESC   &kp A     &kp S    &kp D    &kp F      &kp G  &none           &kp LCTRL &kp LALT &kp LGUI  &kp RCTRL           &none &kp H  &kp J  &kp K     &kp L    &kp SEMI &kp SQT
-        &kp LSHFT &kp Z     &kp X    &kp C    &kp V      &kp B                            &kp HOME &kp PG_UP                           &kp N  &kp M  &kp COMMA &kp DOT  &kp FSLH &kp RSHFT
-        &mo 2     &kp GRAVE &kp CAPS &kp LEFT &kp RIGHT                &kp BSPC &kp DEL   &kp END  &kp PG_DN &kp ENTER &kp SPACE              &kp UP &kp DOWN  &kp LBKT &kp RBKT &mo 2
-      >;
-    };
-    keypad {
-      display-name = "Kp";
-      bindings = <
-        &kp EQUAL &kp N1    &kp N2   &kp N3   &kp N4     &kp N5 &trans                                                           &mo 3 &kp N6 &kp KP_NUM &kp KP_EQUAL &kp KP_DIVIDE &kp KP_MULTIPLY &kp MINUS
-        &kp TAB   &kp Q     &kp W    &kp E    &kp R      &kp T  &none                                                            &none &kp Y  &kp KP_N7  &kp KP_N8    &kp KP_N9     &kp KP_MINUS    &kp BSLH
-        &kp ESC   &kp A     &kp S    &kp D    &kp F      &kp G  &none           &kp LCTRL &kp LALT &kp LGUI  &kp RCTRL           &none &kp H  &kp KP_N4  &kp KP_N5    &kp KP_N6     &kp KP_PLUS     &kp SQT
-        &kp LSHFT &kp Z     &kp X    &kp C    &kp V      &kp B                            &kp HOME &kp PG_UP                           &kp N  &kp KP_N1  &kp KP_N2    &kp KP_N3     &kp KP_ENTER    &kp RSHFT
-        &mo 2     &kp GRAVE &kp CAPS &kp LEFT &kp RIGHT                &kp BSPC &kp DEL   &kp END  &kp PG_DN &kp ENTER &kp KP_N0              &kp UP     &kp DOWN     &kp KP_DOT    &kp RBKT        &mo 2
-      >;
-    };
+            display-name = "Base";
+            bindings = <
+&kp EQUAL  &kp N1       &kp N2  &kp N3    &kp N4     &kp N5  &to 1                                                          &mo 4                &kp N6  &kp N7  &kp N8     &kp N9    &kp N0    &kp MINUS
+&kp TAB    &kp Q        &kp W   &kp E     &kp R      &kp T   &lt 2 LC(R)                                                    &hm RIGHT_ALT LC(Q)  &kp Y   &kp U   &kp I      &kp O     &kp P     &kp RBKT
+&kp CAPS   &kp A        &kp S   &kp D     &kp F      &kp G   &hm CAPS LA(H)  &kp LCTRL  &kp LALT      &kp LGUI   &kp RCTRL  &hm CAPS LA(Q)       &kp H   &kp J   &kp K      &kp L     &kp SEMI  &kp SQT
+&kp LSHFT  &kp Z        &kp X   &kp C     &kp V      &kp B                              &kp CAPS      &kp BACKSLASH                              &kp N   &kp M   &kp COMMA  &kp DOT   &kp FSLH  &kp RSHFT
+&mo 3      &td0         &to 2   &mt CAPS LEFT  &mt LGUI RIGHT  &kp LSHIFT    &kp SPC    &mo 2         &kp RIGHT_ALT  &kp ENTER  &kp RSHIFT               &kp UP  &kp DOWN   &kp LBKT  &kp RBKT  &mo 3
+            >;
+        };
+
+        neo_layer {
+            display-name = "Neo";
+            bindings = <
+&kp EQUAL  &kp N1    &kp N2     &kp N3    &kp N4     &kp N5  &to 0                                                              &mo 4    &kp N6  &kp N7  &kp N8     &kp N9    &kp N0    &kp MINUS
+&kp TAB    &kp X     &kp V      &kp L     &kp C      &kp W   &mo 2                                                             &mo2   &kp K   &kp H   &kp G      &kp F     &kp Q     &kp RIGHT_BRACKET
+&kp CAPS   &kp U     &kp I      &kp A     &kp E      &kp O   &mo 6     &trans  &trans      &trans       &trnas       &mo6   &kp S   &kp N   &kp R      &kp T     &kp D     &kp Y
+&kp LSHFT  &kp LBKT  &kp SLASH  &kp SEMI  &kp P      &kp Z                            &trans      &mo 6                        &kp B   &kp M   &kp COMMA  &kp DOT   &kp J     &kp RSHFT
+&macro_neo &kp ESC   &to 2      &kp LEFT  &kp RIGHT          &trans      &trans    &trans         &mo 2  &trans  &trans          &kp UP  &kp DOWN   &kp LBKT  &kp RBKT  &trans
+            >;
+        };
+
+        keypad {
+            display-name = "Kp";
+            bindings = <
+&kp EQUAL  &kp N1     &kp N2    &kp N3     &kp N4     &kp N5      &trans                                                   &mo 4         &kp LA(O)        &kp KP_NUM  &kp KP_EQUAL  &kp KP_DIVIDE  &kp KP_MULTIPLY  &kp MINUS
+&kp TAB    &kp PG_UP  &kp BSPC  &kp UP     &kp DEL    &kp PG_DN   &trans                                                   &trans        &kp LC(U)        &kp KP_N7   &kp KP_N8     &kp KP_N9      &kp KP_MINUS     &kp BSLH
+&kp ESC    &kp HOME   &kp LEFT  &kp DOWN   &kp RIGHT  &kp END     &trans    &trans  &trans     &trans   &trans             &trans        &kp LA(H)        &kp KP_N4   &kp KP_N5     &kp KP_N6      &kp KP_PLUS      &kp SQT
+&kp LSHFT  &kp ESC    &kp TAB   &kp LG(V)  &kp RET    &kp K_UNDO                       &trans        &trans                              &kp COLON        &kp KP_N1   &kp KP_N2     &kp KP_N3      &kp KP_ENTER     &kp RSHFT
+&trans     &mo 4      &trans    &kp C_BRI_DN &kp C_BRI_UP         &trans    &trans  &trans        &trans     &kp DEL    &kp NUMBER_0                      &kp C_VOL_UP &kp C_VOL_DN &kp C_MUTE     &kp K_PLAY_PAUSE &trans
+            >;
+        };
+
     fn {
       display-name = "Fn";
       bindings = <
-        &kp F1 &kp F2 &kp F3 &kp F4 &kp F5 &kp F6 &tog 1                                           &mo 3 &kp F7 &kp F8 &kp F9 &kp F10 &kp F11 &kp F12
+        &kp F1 &kp F2 &kp F3 &kp F4 &kp F5 &kp F6 &to 1                                            &mo 4 &kp F7 &kp F8 &kp F9 &kp F10 &kp F11 &kp F12
         &trans &trans &trans &trans &trans &trans  &none                                           &none &trans &trans &trans &trans  &trans  &trans
-        &trans &trans &trans &trans &trans &trans  &none        &trans &trans &trans &trans        &none &trans &trans &trans &trans  &trans  &trans
+        &trans &trans &trans &trans &trans &trans  &none        &trans &trans &kp K_APP &trans     &none &trans &trans &trans &trans  &trans  &trans
         &trans &trans &trans &trans &trans &trans                      &trans &trans                     &trans &trans &trans &trans  &trans  &trans
-        &trans &trans &trans &trans &trans               &trans &trans &trans &trans &trans &trans              &trans &trans &trans  &trans  &trans
+        &trans &trans &trans &trans &trans               &kp SPC &kp K_REDO &trans &trans &trans &trans         &trans &trans &trans  &trans  &trans
       >;
     };
+
     mod {
       display-name = "Mod";
       bindings = <
         &none &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &none                                                                     &trans                 &none        &none        &none        &none &none &none
         &none &none        &none        &none        &none        &none        &bootloader                                                               &bootloader            &none        &none        &none        &none &none &none
-        &studio_unlock &none        &none        &none        &none        &none        &none                   &none &none &bt BT_CLR &none                      &stp STP_BAT &none        &none        &none        &none &none &none
-        &none &none        &none        &none        &macro_ver   &none                                      &none &none                                                        &none        &none        &none        &none &none &none
-        &none &none        &none        &none        &none                                       &none &none &none &none      &bl BL_TOG &rgb_ug RGB_TOG                                     &bl BL_INC   &bl BL_DEC   &none &none &none
+        &studio_unlock &none     &none  &none        &none        &none        &none                   &none &none  &bt BT_CLR &none                      &stp STP_BAT          &none        &none        &none        &none &none &none
+        &none &none        &none        &none        &macro_ver   &none                                      &none  &none                                                        &none        &none        &none        &none &none &none
+        &none &none        &none        &none        &none                                       &none &none &none  &none      &bl BL_TOG &rgb_ug RGB_TOG                                     &bl BL_INC   &bl BL_DEC   &none &none &none
       >;
     };
-    extra1 { 
-      display-name = "Red";    
-      status = "reserved";
+
+        qwert_layer {
+            display-name = "QWERT";
+            bindings = <
+&kp EQUAL  &kp N1    &kp N2     &kp N3    &kp N4     &kp N5  &to 0                                                            &mo 4      &kp N6  &kp N7  &kp N8     &kp N9    &kp N0    &kp MINUS
+&kp TAB    &kp r     &kp V      &kp L     &kp C      &kp W   &trans                                                     &trans   &kp K   &kp H   &kp G      &kp F     &kp Q     &kp RIGHT_BRACKET
+&kp CAPS   &kp U     &kp I      &kp A     &kp E      &kp O   &trans     &kp LCTRL  &kp LALT      &kp LGUI       &kp RCTRL  &trans  &kp S   &kp N   &kp R      &kp T     &kp D     &kp Y
+&kp LSHFT  &kp LBKT  &kp SLASH  &kp SEMI  &kp P      &kp Z                            &kp CAPS      &kp BACKSLASH                        &kp B   &kp M   &kp COMMA  &kp DOT   &kp J     &kp RSHFT
+&macro_neo &kp ESC   &to 2      &kp LEFT  &kp RIGHT          &kp BSPC      &kp DEL    &mo 2         &kp RIGHT_ALT  &kp ENTER  &kp SPACE          &kp UP  &kp DOWN   &kp LBKT  &kp RBKT  &trans
+            >;
+        };
+
+    hw_layer_3 {
+      display-name = "HWLayer3";
+      bindings = <
+        &trans &kp N1     &kp N2    &kp N3     &kp N4     &kp N5      &trans                                                   &mo 4         &trans        &trans  &trans      &trans  &trans  &trans
+        &trans  &none      &none        &none        &none        &trans        &trans                                                               &trans            &none        &none        &none        &trans &trans &trans
+        &trans &trans     &none  &none        &none        &trans        &trans                  &none &none  &trans &none                      &trans     &none        &none        &none        &none &none &trans
+        &trans &trans        &trans        &trans        &trans   &trans                                      &none  &none                                                        &trans        &trans        &trans        &trans &trans &trans
+        &trans &trans        &trans        &trans        &trans                                       &trans &trans &trans  &trans      &trans &trans &trans &trans &trans &trans &trans
+      >;
     };
 
-    extra2 { 
-      display-name = "Purple";    
-      status = "reserved";
-    };
-
-    extra3 { 
-      display-name = "Cyan";    
-      status = "reserved";
-    };
-
-    extra4 { 
-      display-name = "Yellow";    
-      status = "reserved";
-    };
   };
 };
