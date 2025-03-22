@@ -89,10 +89,10 @@
         qwert_layer {
             display-name = "QWERT";
             bindings = <
-&kp EQUAL  &kp N1    &kp N2     &kp N3    &kp N4     &kp N5  &to 0                                                        &mo 4      &kp N6  &kp N7  &kp N8     &kp N9    &kp N0    &kp MINUS
-&kp TAB    &kp X     &kp V      &kp L     &kp C      &kp W   &trans                                                       &trans     &kp K   &kp H   &kp G      &kp F     &kp Q     &kp RIGHT_BRACKET
-&kp CAPS   &kp U     &kp I      &kp A     &kp E      &kp O   &trans    &kp LCTRL  &kp LALT      &kp LGUI       &kp RCTRL  &trans     &kp S   &kp N   &kp R      &kp T     &kp D     &kp Y
-&kp LSHFT  &kp LBKT  &kp SLASH  &kp SEMI  &kp P      &kp Z                        &kp CAPS      &kp BACKSLASH                        &kp B   &kp M   &kp COMMA  &kp DOT   &kp J     &kp RSHFT
+&kp ESC    &kp N1    &kp N2     &kp N3    &kp N4     &kp N5  &to 0                                                        &mo 4      &kp N6  &kp N7  &kp N8     &kp N9    &kp N0    &kp LBRC
+&kp TAB    &kp P     &kp T      &kp F     &kp K      &kp L   &trans                                                       &trans     &kp B   &kp A   &kp S      &kp G     &kp V     &kp Z
+&kp CAPS   &kp D     &kp H      &kp SCLN  &kp O      &kp I   &trans    &kp LCTRL  &kp LALT      &kp LGUI       &kp RCTRL  &trans     &kp U   &kp SLSH &kp Y      &kp E     &kp X     &kp C
+&kp LSHFT  &kp QUOT  &kp Q      &kp R     &kp W      &kp N                        &kp CAPS      &kp BACKSLASH                        &kp J   &kp M   &kp COMMA  &kp DOT   &kp MINS  &kp RSHFT
 &mo 0      &kp ESC   &td0       &kp LEFT  &kp RIGHT          &kp BSPC  &kp DEL    &mo 2         &kp RIGHT_ALT  &kp ENTER  &kp SPACE          &kp UP  &kp DOWN   &kp LBKT  &kp RBKT  &trans
             >;
         };
