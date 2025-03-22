@@ -25,6 +25,26 @@
             #binding-cells = <0>;
             tapping-term-ms = <200>;
             bindings = <&kp ESC>, <&mo 2>, <&mo 5>;
+
+            label = "Esc-L2-L5";
+        };
+    };
+
+    macros {
+        macro_jp0: macro_jp0 {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            bindings =
+                <&macro_press>,
+                <&kp LA(A)>,
+                <&macro_wait_time 50>,
+                <&macro_release>,
+                <&macro_tap>,
+                <&macro_param_1to1 &kp MACRO_PLACEHOLDER &kp LC(G)>;
+
+            label = "MACRO_JP0";
+            wait-ms = <20>;
+            tap-ms = <20>;
         };
     };
 
@@ -89,11 +109,11 @@
         qwert_layer {
             display-name = "QWERT";
             bindings = <
-&kp ESC    &kp N1   &kp N2  &kp N3    &kp N4     &kp N5  &to 0                                                        &mo 4      &kp N6  &kp N7     &kp N8     &kp N9    &kp N0     &kp LBRC
-&kp TAB    &kp P    &kp T   &kp F     &kp K      &kp L   &trans                                                       &trans     &kp B   &kp A      &kp S      &kp G     &kp V      &kp Z
-&kp CAPS   &kp D    &kp H   &kp SEMI  &kp O      &kp I   &trans    &kp LCTRL  &kp LALT      &kp LGUI       &kp RCTRL  &trans     &kp U   &kp SLASH  &kp Y      &kp E     &kp X      &kp C
-&kp LSHFT  &kp SQT  &kp Q   &kp R     &kp W      &kp N                        &kp CAPS      &kp BACKSLASH                        &kp J   &kp M      &kp COMMA  &kp DOT   &kp MINUS  &kp RSHFT
-&mo 0      &td0     &trans  &kp LEFT  &kp RIGHT          &kp BSPC  &kp DEL    &mo 2         &kp RIGHT_ALT  &kp ENTER  &kp SPACE          &kp UP     &kp DOWN   &kp LBKT  &kp RBKT   &mo 0
+&kp ESC    &kp N1   &kp N2        &kp N3    &kp N4     &kp N5  &to 0                                                        &mo 4      &kp N6  &kp N7     &kp N8     &kp N9    &kp N0     &kp LBRC
+&kp TAB    &kp P    &kp T         &kp F     &kp K      &kp L   &trans                                                       &trans     &kp B   &kp A      &kp S      &kp G     &kp V      &kp Z
+&kp CAPS   &kp D    &kp H         &kp SEMI  &kp O      &kp I   &trans    &kp LCTRL  &kp LALT      &kp LGUI       &kp RCTRL  &trans     &kp U   &kp SLASH  &kp Y      &kp E     &kp X      &kp C
+&kp LSHFT  &kp SQT  &kp Q         &kp R     &kp W      &kp N                        &kp CAPS      &kp BACKSLASH                        &kp J   &kp M      &kp COMMA  &kp DOT   &kp MINUS  &kp RSHFT
+&mo 0      &td0     &macro_jp0 A  &kp LEFT  &kp RIGHT          &kp BSPC  &kp DEL    &mo 2         &kp RIGHT_ALT  &kp ENTER  &kp SPACE          &kp UP     &kp DOWN   &kp LBKT  &kp RBKT   &mo 0
             >;
         };
 
@@ -115,6 +135,16 @@
 &trans  &trans  &trans  &trans  &trans  &trans     &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans                     &trans      &trans                  &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans             &trans  &trans  &trans      &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
+        mac_os {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans     &trans  &trans                                        &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans     &trans  &trans                                        &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans     &trans  &trans  &kp LCMD  &trans      &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans     &trans                    &trans      &trans                  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &kp LCTRL          &trans  &trans    &trans      &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans
             >;
         };
     };
