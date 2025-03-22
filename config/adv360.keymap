@@ -67,7 +67,7 @@
         fn {
             display-name = "Fn";
             bindings = <
-&kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6  &to 1                                                 &mo 4   &kp F7  &kp F8  &kp F9  &kp F10  &kp F11  &kp F12
+&kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6  &to 5                                                 &mo 4   &kp F7  &kp F8  &kp F9  &kp F10  &kp F11  &kp F12
 &trans  &trans  &trans  &trans  &trans  &trans  &none                                                 &none   &trans  &trans  &trans  &trans   &trans   &trans
 &trans  &trans  &trans  &trans  &trans  &trans  &none      &trans      &trans      &kp K_APP  &trans  &none   &trans  &trans  &trans  &trans   &trans   &trans
 &trans  &trans  &trans  &trans  &trans  &trans                         &trans      &trans                     &trans  &trans  &trans  &trans   &trans   &trans
@@ -93,7 +93,7 @@
 &kp TAB    &kp P    &kp T   &kp F     &kp K      &kp L   &trans                                                       &trans     &kp B   &kp A      &kp S      &kp G     &kp V      &kp Z
 &kp CAPS   &kp D    &kp H   &kp SEMI  &kp O      &kp I   &trans    &kp LCTRL  &kp LALT      &kp LGUI       &kp RCTRL  &trans     &kp U   &kp SLASH  &kp Y      &kp E     &kp X      &kp C
 &kp LSHFT  &kp SQT  &kp Q   &kp R     &kp W      &kp N                        &kp CAPS      &kp BACKSLASH                        &kp J   &kp M      &kp COMMA  &kp DOT   &kp MINUS  &kp RSHFT
-&mo 0      &kp ESC  &td0    &kp LEFT  &kp RIGHT          &kp BSPC  &kp DEL    &mo 2         &kp RIGHT_ALT  &kp ENTER  &kp SPACE          &kp UP     &kp DOWN   &kp LBKT  &kp RBKT   &trans
+&mo 0      &td0     &trans  &kp LEFT  &kp RIGHT          &kp BSPC  &kp DEL    &mo 2         &kp RIGHT_ALT  &kp ENTER  &kp SPACE          &kp UP     &kp DOWN   &kp LBKT  &kp RBKT   &mo 0
             >;
         };
 
