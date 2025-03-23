@@ -592,5 +592,42 @@
             >;
         };
 
+    /* Keymap 12:
+     *
+     * Emacs Modifications (EmacsLayer1)
+     *
+     * These are some keybindings and macros for easier Emacs usage on vanilla keybindings.
+     *
+     * ,--------------------------------------------------.           ,--------------------------------------------------.
+     * |  trans | trans| trans| trans| trans| trans| trans|           | trans| trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans| trans| trans|           | trans| trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+------|------|           |------|------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans| trans| trans|           | trans| trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+------|------'           `------|------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans| trans|                         | trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+------'                         `------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans|                                       | trans| trans| trans| trans| trans  |
+     * `------------------------------------'                                       `------------------------------------'
+     *                                        ,-------------.       ,-------------.
+     *                                        | trans| trans|       | trans| trans|
+     *                                 ,------|------|------|       |------+------+------.
+     *                                 |      |      | trans|       | trans|      |      |
+     *                                 | trans| trans|------|       |------| trans| trans|
+     *                                 |      |      | trans|       | trans|      |      |
+     *                                 `--------------------'       `--------------------'
+     */
+
+        emacs_layer_1 {
+            display-name = "EmacsLayer1";
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans     &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans     &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans     &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                     &trans      &trans                  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans             &trans  &trans  &trans      &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
     };
 };
