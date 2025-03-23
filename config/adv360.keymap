@@ -111,7 +111,8 @@
         };
 
         /*
-         * mo_st
+         * mo_st: Momentary Layer or Sticky Layer
+         *
          * Hold
          *   Momentary (mo <1>)
          * Tap
@@ -123,6 +124,20 @@
             flavor = "hold-preferred";
             tapping-term-ms = <200>;
             bindings = <&mo>, <&st>;
+        };
+
+        // lt_spc: Momentary Layer or Space Sticky Shift Macro
+        // Tap: space
+        // s-   tap: dot -> space -> sticky shift
+        // C-s- tap: excl(!) -> space -> sticky shift
+        // Hold: nav layer.
+        lt_spc: behavior_lt_spc {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <200>;
+            bindings = <&mo>, <&m_dot_spc>;
         };
 
         /*
@@ -141,6 +156,62 @@
 
             label = "TapDance-Neo-QWERT";
         };
+
+        // mod-morph
+        //
+        // From https://zmk.dev/docs/keymaps/behaviors/mod-morph
+
+        gresc: grave_escape {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp ESC>, <&kp GRAVE>;
+            mods = <(MOD_LGUI|MOD_LSFT|MOD_RGUI|MOD_RSFT)>;
+        };
+
+        // From https://github.com/urob/zmk-config/blob/main/config/base.keymap
+        // Tap: backspace
+        // Lshft + tap: delete
+        // Rshft + tap: shift-delete.
+        m_bspc: morph_backspace {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp BSPC>, <&kp DEL>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            keep-mods = <MOD_RSFT>;
+        };
+
+        // Tap: comma
+        // Shift + tap: semicolon
+        // Ctrl + shift + tap: <
+        m_inner_comma: morph_inner_comma {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp SEMICOLON>, <&kp LESS_THAN>;
+            mods = <(MOD_LCTL|MOD_RCTL)>;
+        };
+        m_comma: morph_comma {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp COMMA>, <&m_inner_comma>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
+        // Tap: Space
+        // s-   tap: dot               -> space -> sticky shift
+        // C-s- tap: exclamation point -> space -> sticky shift
+        m_excl_spc: morph_excl_space {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&macro_jp0 DOT>, <&macro_jp0 EXCL>;
+            mods = <(MOD_LCTL|MOD_RCTL)>;
+        };
+        m_dot_spc: morph_dot_space {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp SPC>, <&m_excl_spc>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
     };
 
     macros {
@@ -148,17 +219,13 @@
             compatible = "zmk,behavior-macro-one-param";
             #binding-cells = <1>;
             bindings =
-                <&macro_press>,
-                <&kp LA(A)>,
-                <&macro_wait_time 50>,
-                <&macro_release>,
-                <&macro_tap>,
-                <&macro_param_1to1 &kp MACRO_PLACEHOLDER &kp LC(G)>;
+                <&macro_param_1to1 &kp MACRO_PLACEHOLDER &kp SPACE &sk LSHFT>;
 
             label = "MACRO_JP0";
-            wait-ms = <20>;
-            tap-ms = <20>;
+            wait-ms = <0>;
+            tap-ms = <5>;
         };
+
     };
 
     keymap {
@@ -198,7 +265,7 @@
 &kp TAB          &kp Q       &kp W         &kp E          &kp R           &kp T   &lt 2 LC(R)                                                         &htm RIGHT_ALT LC(Q)  &kp Y   &kp U        &kp I       &kp O         &kp P          &kp BSLH
 &htm CAPS LA(T)  &hm LGUI A  &hm LSHIFT S  &hm LALT D     &hm LCTRL F     &kp G   &htm CAPS LA(H)  &kp LCTRL  &kp LALT      &kp LGUI       &kp RCTRL  &htm CAPS LA(Q)       &kp H   &hm RCTRL J  &hm RALT K  &hm RSHIFT L  &hm RGUI SEMI  &hm CAPS SQT
 &kp LSHFT        &kp Z       &kp X         &kp C          &kp V           &kp B                               &kp CAPS      &kp BACKSLASH                                   &kp N   &kp M        &kp COMMA   &kp DOT       &kp FSLH       &kp RSHFT
-&mo_st 2 3       &td0        &tog 2        &mt CAPS LEFT  &mt LGUI RIGHT          &kp LSHIFT       &kp SPACE  &mo 2         &kp RIGHT_ALT  &kp ENTER  &kp RSHIFT                    &kp UP       &kp DOWN    &kp LBKT      &kp RBKT       &mo 3
+&mo_st 2 3       &td0        &tog 2        &mt CAPS LEFT  &mt LGUI RIGHT          &kp LSHIFT       &lt_spc 2  &mo 2         &kp RIGHT_ALT  &kp ENTER  &kp RSHIFT                    &kp UP       &kp DOWN    &kp LBKT      &kp RBKT       &mo 3
             >;
         };
 
@@ -269,7 +336,7 @@
             display-name = "Kp";
             bindings = <
 &td0         &kp N1     &kp N2    &kp N3        &kp N4        &kp N5      &trans                                       &mo 4         &kp LA(O)  &kp KP_NUM    &kp KP_EQUAL  &kp KP_DIVIDE  &kp KP_MULTIPLY   &kp MINUS
-&kp TAB      &kp PG_UP  &kp BSPC  &kp UP        &kp DEL       &kp PG_DN   &trans                                       &trans        &kp LC(U)  &kp KP_N7     &kp KP_N8     &kp KP_N9      &kp KP_MINUS      &kp BSLH
+&kp TAB      &kp PG_UP  &m_bspc   &kp UP        &kp DEL       &kp PG_DN   &trans                                       &trans        &kp LC(U)  &kp KP_N7     &kp KP_N8     &kp KP_N9      &kp KP_MINUS      &kp BSLH
 &kp CAPS     &kp HOME   &kp LEFT  &kp DOWN      &kp RIGHT     &kp END     &trans  &trans  &trans      &trans  &trans   &trans        &kp LA(H)  &kp KP_N4     &kp KP_N5     &kp KP_N6      &kp KP_PLUS       &kp SQT
 &kp LSHFT    &kp ESC    &kp TAB   &kp LG(V)     &kp RET       &kp K_UNDO                  &trans      &trans                         &kp COLON  &kp KP_N1     &kp KP_N2     &kp KP_N3      &kp KP_ENTER      &kp RSHFT
 &mo_tog 7 5  &mo 6      &trans    &kp C_BRI_DN  &kp C_BRI_UP              &trans  &trans  &trans      &trans  &kp DEL  &kp NUMBER_0             &kp C_VOL_UP  &kp C_VOL_DN  &kp C_MUTE     &kp K_PLAY_PAUSE  &trans
@@ -309,7 +376,7 @@
 &trans  &trans  &trans  &trans  &trans  &trans  &none                                                 &none   &trans  &trans  &trans  &trans   &trans   &trans
 &trans  &trans  &trans  &trans  &trans  &trans  &none      &trans      &trans      &kp K_APP  &trans  &none   &trans  &trans  &trans  &trans   &trans   &trans
 &trans  &trans  &trans  &trans  &trans  &trans                         &trans      &trans                     &trans  &trans  &trans  &trans   &trans   &trans
-&trans  &trans  &trans  &trans  &trans          &kp SPACE  &kp K_REDO  &trans      &trans     &trans  &trans          &trans  &trans  &trans   &trans   &trans
+&trans  &trans  &trans  &trans  &trans          &lt_spc 2  &kp K_REDO  &trans      &trans     &trans  &trans          &trans  &trans  &trans   &trans   &trans
             >;
         };
 
@@ -383,7 +450,7 @@
 &kp TAB    &kp P    &kp T     &kp F     &kp K      &kp L   &trans                                                       &trans     &kp B   &kp A      &kp S      &kp G     &kp V      &kp Z
 &mo 6      &kp D    &kp H     &kp SEMI  &kp O      &kp I   &trans    &kp LCTRL  &kp LALT      &kp LGUI       &kp RCTRL  &trans     &kp U   &kp SLASH  &kp Y      &kp E     &kp X      &kp C
 &kp LSHFT  &kp SQT  &kp Q     &kp R     &kp W      &kp N                        &kp CAPS      &kp BACKSLASH                        &kp J   &kp M      &kp COMMA  &kp DOT   &kp MINUS  &kp RSHFT
-&mo 0      &trans   &kp LGUI  &kp LEFT  &kp RIGHT          &kp BSPC  &kp DEL    &mo 2         &kp RIGHT_ALT  &kp ENTER  &kp SPACE          &kp UP     &kp DOWN   &kp LBKT  &kp RBKT   &mo 0
+&mo 0      &trans   &kp LGUI  &kp LEFT  &kp RIGHT          &m_bspc   &kp DEL    &mo 2         &kp RIGHT_ALT  &kp ENTER  &lt_spc 2          &kp UP     &kp DOWN   &kp LBKT  &kp RBKT   &mo 0
             >;
         };
 
