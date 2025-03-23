@@ -111,19 +111,19 @@
         };
 
         /*
-         * mo_st: Momentary Layer or Sticky Layer
+         * mo_sl: Momentary Layer or Sticky Layer
          *
          * Hold
          *   Momentary (mo <1>)
          * Tap
-         *   Sticky Key (st <2>)
+         *   Sticky Layer (sl <2>)
          */
-        mo_st: behavior_mo_st {
+        mo_sl: behavior_mo_sl {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "hold-preferred";
             tapping-term-ms = <200>;
-            bindings = <&mo>, <&st>;
+            bindings = <&mo>, <&sl>;
         };
 
         // lt_spc: Momentary Layer or Space Sticky Shift Macro
@@ -265,7 +265,7 @@
 &kp TAB          &kp Q       &kp W         &kp E          &kp R           &kp T   &lt 2 LC(R)                                                         &htm RIGHT_ALT LC(Q)  &kp Y   &kp U        &kp I       &kp O         &kp P          &kp BSLH
 &htm CAPS LA(T)  &hm LGUI A  &hm LSHIFT S  &hm LALT D     &hm LCTRL F     &kp G   &htm CAPS LA(H)  &kp LCTRL  &kp LALT      &kp LGUI       &kp RCTRL  &htm CAPS LA(Q)       &kp H   &hm RCTRL J  &hm RALT K  &hm RSHIFT L  &hm RGUI SEMI  &hm CAPS SQT
 &kp LSHFT        &kp Z       &kp X         &kp C          &kp V           &kp B                               &kp CAPS      &kp BACKSLASH                                   &kp N   &kp M        &kp COMMA   &kp DOT       &kp FSLH       &kp RSHFT
-&mo_st 2 3       &td0        &tog 2        &mt CAPS LEFT  &mt LGUI RIGHT          &kp LSHIFT       &lt_spc 2  &mo 2         &kp RIGHT_ALT  &kp ENTER  &kp RSHIFT                    &kp UP       &kp DOWN    &kp LBKT      &kp RBKT       &mo 3
+&mo_sl 2 3       &td0        &tog 2        &mt CAPS LEFT  &mt LGUI RIGHT          &kp LSHIFT       &lt_spc 2  &mo 2         &kp RIGHT_ALT  &kp ENTER  &kp RSHIFT                    &kp UP       &kp DOWN    &kp LBKT      &kp RBKT       &mo 3
             >;
         };
 
@@ -302,7 +302,7 @@
 &kp TAB    &kp X     &kp V      &kp L     &kp C      &kp W   &mo 2                                       &mo 2   &kp K   &kp H   &kp G      &kp F     &kp Q     &kp BSLH
 &mo 6      &kp U     &kp I      &kp A     &kp E      &kp O   &mo 6   &trans  &trans      &trans  &trans  &mo 6   &kp S   &kp N   &kp R      &kp T     &kp D     &kp Y
 &kp LSHFT  &kp LBKT  &kp SLASH  &kp SEMI  &kp P      &kp Z                   &trans      &mo 6                   &kp B   &kp M   &kp COMMA  &kp DOT   &kp J     &kp RSHFT
-&mo_st 2 3 &kp ESC   &td0       &kp LEFT  &kp RIGHT          &trans  &trans  &trans      &mo 2   &trans  &trans          &kp UP  &kp DOWN   &kp LBKT  &kp RBKT  &trans
+&mo_sl 2 3 &kp ESC   &td0       &kp LEFT  &kp RIGHT          &trans  &trans  &trans      &mo 2   &trans  &trans          &kp UP  &kp DOWN   &kp LBKT  &kp RBKT  &trans
             >;
         };
 
