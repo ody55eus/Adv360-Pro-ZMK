@@ -5,18 +5,20 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/rgb.h>
 
+#define AS(keycode) &as LS(keycode) keycode     // Autoshift Macro
+
 / {
     behaviors {
         #include "macros.dtsi"
         #include "version.dtsi"
 
         /*
-         * Homerow Mods (hm): hold-preferred
+         * Hometrigger Mods (hm): hold-preferred
          *
          * Hold (kp <1>)
          * Tap  (kp <2>)
          */
-        hm: homerow_mods {
+        htm: hometrigger_mods {
             compatible = "zmk,behavior-hold-tap";
             label = "HOMEROW_MODS";
             #binding-cells = <2>;
@@ -27,9 +29,85 @@
         };
 
         /*
-         * Tap Dance 0 (td0):
+         * From https://zmk.dev/docs/keymaps/behaviors/hold-tap?examples=homerow_mods
          *
-         * Tap 1 (kp <1>)
+         * Homerow Mods (hm): tap-preferred
+         *
+         * Hold (kp <1>)
+         * Tap  (kp <2>)
+         */
+        hm: homerow_mods {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOMEROW_MODS";
+            #binding-cells = <2>;
+            tapping-term-ms = <150>;
+            quick-tap-ms = <0>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&kp>;
+        };
+
+        /*
+         * cross-hand only modifiers, using tap-unless-interrupted and positional hold-tap (hold-trigger-key-positions)
+         */
+        lh_pht: left_positional_hold_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-unless-interrupted";
+            tapping-term-ms = <100>;                        // <---[[produces tap if held longer than tapping-term-ms]]
+            quick-tap-ms = <200>;
+            bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <5 6 7 8 9 10>;    // <---[[right-hand keys]]
+        };
+
+        /*
+         * From https://zmk.dev/docs/keymaps/behaviors/hold-tap?examples=autoshift
+         *
+         * A popular method of implementing Autoshift in ZMK involves a C-preprocessor macro, commonly defined as AS(keycode).
+         * This macro applies the LSHIFT modifier to the specified keycode when AS(keycode) is held,
+         * and simply performs a keypress, &kp keycode, when the AS(keycode) binding is tapped.
+         * This simplifies the use of Autoshift in a keymap, as the complete hold-tap bindings for each desired Autoshift key,
+         * as in &as LS(<keycode 1>) <keycode 1> &as LS(<keycode 2>) <keycode 2> ... &as LS(<keycode n>) <keycode n>,
+         * can be quite cumbersome to use when applied to a large portion of the keymap.
+         *
+         * See macro above:
+         * #define AS(keycode) &as LS(keycode) keycode     // Autoshift Macro
+         *
+         * Example:
+         * AS(Q) AS(W) AS(E) AS(R) AS(T) AS(Y)
+         */
+        as: auto_shift {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping_term_ms = <135>;
+            quick_tap_ms = <0>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&kp>;
+        };
+
+        /*
+         * From https://zmk.dev/docs/keymaps/behaviors/hold-tap?examples=mo_tog
+         *
+         * This hold-tap example implements a momentary-layer when the keybind is held and a toggle-layer when it is tapped.
+         * Similar to the Autoshift and Sticky Hold use-cases, a MO_TOG(layer)
+         * macro is defined such that the &mo and &tog behaviors can target a single layer.
+         *
+         * Hold
+         *   Momentary (mo <1>)
+         * Tap
+         *   Toggle (tog <2>)
+         */
+        mo_tog: behavior_mo_tog {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "hold-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&mo>, <&tog>;
+        };
+
+        /*
+         * Tap Dance 0 (td0): tap multiple times for different outcomes
+         *
+         * Tap 1 (kp ESC)
          * Tap 2 (mo 2) (Neo)
          * Tap 3 (mo 5) (QWERTY)
          */
@@ -37,28 +115,11 @@
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <1>;
             tapping-term-ms = <200>;
-            bindings = <&kp>, <&mo 2>, <&mo 5>;
+            bindings = <&kp ESC>, <&mo 2>, <&mo 5>;
 
             label = "TapDance-Neo-QWERT";
         };
 
-        /*
-         * Layer Tap 2 (lt2): hold-preferred
-         *
-         * Hold (400ms)
-         *   Momentary (mo <1>)
-         * Tap
-         *   Toggle (tog <2>)
-         */
-        lt2: layer_tap_2 {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "hold-preferred";
-            tapping-term-ms = <400>;
-            quick-tap-ms = <200>;
-            bindings = <&mo>, <&tog>;
-            hold-trigger-key-positions = <1>;    // <---[[the W key]]
-        };
     };
 
     macros {
@@ -113,10 +174,10 @@
             display-name = "Base";
             bindings = <
 &kp EQUAL  &kp N1  &kp N2  &kp N3         &kp N4          &kp N5  &tog 1                                                             &mo 4                &kp N6  &kp N7  &kp N8     &kp N9    &kp N0    &kp MINUS
-&kp TAB    &kp Q   &kp W   &kp E          &kp R           &kp T   &lt 2 LC(R)                                                        &hm RIGHT_ALT LC(Q)  &kp Y   &kp U   &kp I      &kp O     &kp P     &kp BSLH
-&kp CAPS   &kp A   &kp S   &kp D          &kp F           &kp G   &hm CAPS LA(H)  &kp LCTRL  &kp LALT      &kp LGUI       &kp RCTRL  &hm CAPS LA(Q)       &kp H   &kp J   &kp K      &kp L     &kp SEMI  &kp SQT
+&kp TAB    &kp Q   &kp W   &kp E          &kp R           &kp T   &lt 2 LC(R)                                                        &htm RIGHT_ALT LC(Q) &kp Y   &kp U   &kp I      &kp O     &kp P     &kp BSLH
+&kp CAPS   &kp A   &kp S   &kp D          &kp F           &kp G   &htm CAPS LA(H) &kp LCTRL  &kp LALT      &kp LGUI       &kp RCTRL  &htm CAPS LA(Q)      &kp H   &kp J   &kp K      &kp L     &kp SEMI  &kp SQT
 &kp LSHFT  &kp Z   &kp X   &kp C          &kp V           &kp B                              &kp CAPS      &kp BACKSLASH                                  &kp N   &kp M   &kp COMMA  &kp DOT   &kp FSLH  &kp RSHFT
-&mo 3      &td0 ESC &tog 2 &mt CAPS LEFT  &mt LGUI RIGHT          &kp LSHIFT      &kp SPACE  &mo 2         &kp RIGHT_ALT  &kp ENTER  &kp RSHIFT                   &kp UP  &kp DOWN   &kp LBKT  &kp RBKT  &mo 3
+&mo 3      &td0    &tog 2 &mt CAPS LEFT  &mt LGUI RIGHT          &kp LSHIFT      &kp SPACE  &mo 2         &kp RIGHT_ALT  &kp ENTER  &kp RSHIFT                   &kp UP  &kp DOWN   &kp LBKT  &kp RBKT  &mo 3
             >;
         };
 
@@ -154,7 +215,7 @@
 &kp TAB    &kp X     &kp V      &kp L     &kp C      &kp W   &mo 2                                       &mo 2   &kp K   &kp H   &kp G      &kp F     &kp Q     &kp BSLH
 &mo 6      &kp U     &kp I      &kp A     &kp E      &kp O   &mo 6   &trans  &trans      &trans  &trans  &mo 6   &kp S   &kp N   &kp R      &kp T     &kp D     &kp Y
 &kp LSHFT  &kp LBKT  &kp SLASH  &kp SEMI  &kp P      &kp Z                   &trans      &mo 6                   &kp B   &kp M   &kp COMMA  &kp DOT   &kp J     &kp RSHFT
-&mo 3      &kp ESC   &td0 LGUI  &kp LEFT  &kp RIGHT          &trans  &trans  &trans      &mo 2   &trans  &trans          &kp UP  &kp DOWN   &kp LBKT  &kp RBKT  &trans
+&mo 3      &kp ESC   &td0       &kp LEFT  &kp RIGHT          &trans  &trans  &trans      &mo 2   &trans  &trans          &kp UP  &kp DOWN   &kp LBKT  &kp RBKT  &trans
             >;
         };
 
@@ -187,11 +248,11 @@
         keypad {
             display-name = "Kp";
             bindings = <
-&td0 ESC   &kp N1     &kp N2    &kp N3        &kp N4        &kp N5      &trans                                       &mo 4         &kp LA(O)  &kp KP_NUM    &kp KP_EQUAL  &kp KP_DIVIDE  &kp KP_MULTIPLY   &kp MINUS
+&td0       &kp N1     &kp N2    &kp N3        &kp N4        &kp N5      &trans                                       &mo 4         &kp LA(O)  &kp KP_NUM    &kp KP_EQUAL  &kp KP_DIVIDE  &kp KP_MULTIPLY   &kp MINUS
 &kp TAB    &kp PG_UP  &kp BSPC  &kp UP        &kp DEL       &kp PG_DN   &trans                                       &trans        &kp LC(U)  &kp KP_N7     &kp KP_N8     &kp KP_N9      &kp KP_MINUS      &kp BSLH
 &kp CAPS   &kp HOME   &kp LEFT  &kp DOWN      &kp RIGHT     &kp END     &trans  &trans  &trans      &trans  &trans   &trans        &kp LA(H)  &kp KP_N4     &kp KP_N5     &kp KP_N6      &kp KP_PLUS       &kp SQT
 &kp LSHFT  &kp ESC    &kp TAB   &kp LG(V)     &kp RET       &kp K_UNDO                  &trans      &trans                         &kp COLON  &kp KP_N1     &kp KP_N2     &kp KP_N3      &kp KP_ENTER      &kp RSHFT
-&lt2 7 5   &mo 6      &trans    &kp C_BRI_DN  &kp C_BRI_UP              &trans  &trans  &trans      &trans  &kp DEL  &kp NUMBER_0             &kp C_VOL_UP  &kp C_VOL_DN  &kp C_MUTE     &kp K_PLAY_PAUSE  &trans
+&mo_tog 7 5 &mo 6     &trans    &kp C_BRI_DN  &kp C_BRI_UP              &trans  &trans  &trans      &trans  &kp DEL  &kp NUMBER_0             &kp C_VOL_UP  &kp C_VOL_DN  &kp C_MUTE     &kp K_PLAY_PAUSE  &trans
             >;
         };
 
