@@ -113,7 +113,7 @@
          */
         td0: tap_dance_0 {
             compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <1>;
+            #binding-cells = <0>;
             tapping-term-ms = <200>;
             bindings = <&kp ESC>, <&mo 2>, <&mo 5>;
 
