@@ -18,6 +18,7 @@
          * Hold (kp <1>)
          * Tap  (kp <2>)
          */
+
         htm: hometrigger_mods {
             compatible = "zmk,behavior-hold-tap";
             label = "HOMETRIGGER_MODS";
@@ -36,6 +37,7 @@
          * Hold (kp <1>)
          * Tap  (kp <2>)
          */
+
         hm: homerow_mods {
             compatible = "zmk,behavior-hold-tap";
             label = "HOMEROW_MODS";
@@ -49,6 +51,7 @@
         /*
          * cross-hand only modifiers, using tap-unless-interrupted and positional hold-tap (hold-trigger-key-positions)
          */
+
         lh_pht: left_positional_hold_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -56,6 +59,7 @@
             tapping-term-ms = <100>;                        // <---[[produces tap if held longer than tapping-term-ms]]
             quick-tap-ms = <200>;
             bindings = <&kp>, <&kp>;
+
             hold-trigger-key-positions = <5 6 7 8 9 10>;    // <---[[right-hand keys]]
         };
 
@@ -75,6 +79,7 @@
          * Example:
          * AS(Q) AS(W) AS(E) AS(R) AS(T) AS(Y)
          */
+
         as: auto_shift {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -96,6 +101,7 @@
          * Tap
          *   Toggle (tog <2>)
          */
+
         mo_tog: behavior_mo_tog {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -111,6 +117,7 @@
          * Tap 2 (mo 2) (Neo)
          * Tap 3 (mo 5) (QWERTY)
          */
+
         td0: tap_dance_0 {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
@@ -119,7 +126,6 @@
 
             label = "TapDance-Neo-QWERT";
         };
-
     };
 
     macros {
@@ -143,8 +149,7 @@
     keymap {
         compatible = "zmk,keymap";
 
-
-    /* Keymap 0:
+        /* Keymap 0:
      *
      * Default Layer (Neo2, original QWERTY)
      *
@@ -174,16 +179,15 @@
         default_layer {
             display-name = "Base";
             bindings = <
-&kp EQUAL  &kp N1  &kp N2  &kp N3         &kp N4          &kp N5  &tog 1                                                             &mo 4                &kp N6  &kp N7  &kp N8     &kp N9    &kp N0    &kp MINUS
-&kp TAB    &kp Q   &kp W   &kp E          &kp R           &kp T   &lt 2 LC(R)                                                        &htm RIGHT_ALT LC(Q) &kp Y   &kp U   &kp I      &kp O     &kp P     &kp BSLH
-&htm CAPS LA(T) &hm LGUI A &hm LSHIFT S &hm LALT D &hm LCTRL F &kp G   &htm CAPS LA(H) &kp LCTRL  &kp LALT      &kp LGUI       &kp RCTRL  &htm CAPS LA(Q)      &kp H   &hm RCTRL J   &hm RALT K      &hm RSHIFT L     &hm RGUI SEMI  &hm CAPS SQT
-&kp LSHFT  &kp Z   &kp X   &kp C          &kp V           &kp B                              &kp CAPS      &kp BACKSLASH                                  &kp N   &kp M   &kp COMMA  &kp DOT   &kp FSLH  &kp RSHFT
-&mo 3      &td0    &tog 2 &mt CAPS LEFT  &mt LGUI RIGHT          &kp LSHIFT      &kp SPACE  &mo 2         &kp RIGHT_ALT  &kp ENTER  &kp RSHIFT                   &kp UP  &kp DOWN   &kp LBKT  &kp RBKT  &mo 3
+&kp EQUAL        &kp N1      &kp N2        &kp N3         &kp N4          &kp N5  &tog 1                                                              &mo 4                 &kp N6  &kp N7       &kp N8      &kp N9        &kp N0         &kp MINUS
+&kp TAB          &kp Q       &kp W         &kp E          &kp R           &kp T   &lt 2 LC(R)                                                         &htm RIGHT_ALT LC(Q)  &kp Y   &kp U        &kp I       &kp O         &kp P          &kp BSLH
+&htm CAPS LA(T)  &hm LGUI A  &hm LSHIFT S  &hm LALT D     &hm LCTRL F     &kp G   &htm CAPS LA(H)  &kp LCTRL  &kp LALT      &kp LGUI       &kp RCTRL  &htm CAPS LA(Q)       &kp H   &hm RCTRL J  &hm RALT K  &hm RSHIFT L  &hm RGUI SEMI  &hm CAPS SQT
+&kp LSHFT        &kp Z       &kp X         &kp C          &kp V           &kp B                               &kp CAPS      &kp BACKSLASH                                   &kp N   &kp M        &kp COMMA   &kp DOT       &kp FSLH       &kp RSHFT
+&mo 3            &td0        &tog 2        &mt CAPS LEFT  &mt LGUI RIGHT          &kp LSHIFT       &kp SPACE  &mo 2         &kp RIGHT_ALT  &kp ENTER  &kp RSHIFT                    &kp UP       &kp DOWN    &kp LBKT      &kp RBKT       &mo 3
             >;
         };
 
-
-    /* Keymap 1:
+        /* Keymap 1:
      *
      * Hardware Neo2
      *
@@ -220,7 +224,7 @@
             >;
         };
 
-    /* Keymap 2:
+        /* Keymap 2:
      *
      * Keypad (Kp, Mod4)
      *
@@ -249,15 +253,15 @@
         keypad {
             display-name = "Kp";
             bindings = <
-&td0       &kp N1     &kp N2    &kp N3        &kp N4        &kp N5      &trans                                       &mo 4         &kp LA(O)  &kp KP_NUM    &kp KP_EQUAL  &kp KP_DIVIDE  &kp KP_MULTIPLY   &kp MINUS
-&kp TAB    &kp PG_UP  &kp BSPC  &kp UP        &kp DEL       &kp PG_DN   &trans                                       &trans        &kp LC(U)  &kp KP_N7     &kp KP_N8     &kp KP_N9      &kp KP_MINUS      &kp BSLH
-&kp CAPS   &kp HOME   &kp LEFT  &kp DOWN      &kp RIGHT     &kp END     &trans  &trans  &trans      &trans  &trans   &trans        &kp LA(H)  &kp KP_N4     &kp KP_N5     &kp KP_N6      &kp KP_PLUS       &kp SQT
-&kp LSHFT  &kp ESC    &kp TAB   &kp LG(V)     &kp RET       &kp K_UNDO                  &trans      &trans                         &kp COLON  &kp KP_N1     &kp KP_N2     &kp KP_N3      &kp KP_ENTER      &kp RSHFT
-&mo_tog 7 5 &mo 6     &trans    &kp C_BRI_DN  &kp C_BRI_UP              &trans  &trans  &trans      &trans  &kp DEL  &kp NUMBER_0             &kp C_VOL_UP  &kp C_VOL_DN  &kp C_MUTE     &kp K_PLAY_PAUSE  &trans
+&td0         &kp N1     &kp N2    &kp N3        &kp N4        &kp N5      &trans                                       &mo 4         &kp LA(O)  &kp KP_NUM    &kp KP_EQUAL  &kp KP_DIVIDE  &kp KP_MULTIPLY   &kp MINUS
+&kp TAB      &kp PG_UP  &kp BSPC  &kp UP        &kp DEL       &kp PG_DN   &trans                                       &trans        &kp LC(U)  &kp KP_N7     &kp KP_N8     &kp KP_N9      &kp KP_MINUS      &kp BSLH
+&kp CAPS     &kp HOME   &kp LEFT  &kp DOWN      &kp RIGHT     &kp END     &trans  &trans  &trans      &trans  &trans   &trans        &kp LA(H)  &kp KP_N4     &kp KP_N5     &kp KP_N6      &kp KP_PLUS       &kp SQT
+&kp LSHFT    &kp ESC    &kp TAB   &kp LG(V)     &kp RET       &kp K_UNDO                  &trans      &trans                         &kp COLON  &kp KP_N1     &kp KP_N2     &kp KP_N3      &kp KP_ENTER      &kp RSHFT
+&mo_tog 7 5  &mo 6      &trans    &kp C_BRI_DN  &kp C_BRI_UP              &trans  &trans  &trans      &trans  &kp DEL  &kp NUMBER_0             &kp C_VOL_UP  &kp C_VOL_DN  &kp C_MUTE     &kp K_PLAY_PAUSE  &trans
             >;
         };
 
-    /* Keymap 3:
+        /* Keymap 3:
      *
      * Function Keys (Fn)
      *
@@ -294,7 +298,7 @@
             >;
         };
 
-    /* Keymap 4:
+        /* Keymap 4:
      *
      * Keyboard Modification Layer (Mod)
      *
@@ -331,7 +335,7 @@
             >;
         };
 
-    /* Keymap 5:
+        /* Keymap 5:
      *
      * QWERTY Layer (QWERT)
      *
@@ -360,15 +364,15 @@
         qwert_layer {
             display-name = "QWERT";
             bindings = <
-&kp ESC    &kp N1   &kp N2        &kp N3    &kp N4     &kp N5  &to 0                                                        &mo 4      &kp N6  &kp N7     &kp N8     &kp N9    &kp N0     &kp LBRC
-&kp TAB    &kp P    &kp T         &kp F     &kp K      &kp L   &trans                                                       &trans     &kp B   &kp A      &kp S      &kp G     &kp V      &kp Z
-&mo 6      &kp D    &kp H         &kp SEMI  &kp O      &kp I   &trans    &kp LCTRL  &kp LALT      &kp LGUI       &kp RCTRL  &trans     &kp U   &kp SLASH  &kp Y      &kp E     &kp X      &kp C
-&kp LSHFT  &kp SQT  &kp Q         &kp R     &kp W      &kp N                        &kp CAPS      &kp BACKSLASH                        &kp J   &kp M      &kp COMMA  &kp DOT   &kp MINUS  &kp RSHFT
-&mo 0      &trans   &kp LGUI      &kp LEFT  &kp RIGHT          &kp BSPC  &kp DEL    &mo 2         &kp RIGHT_ALT  &kp ENTER  &kp SPACE          &kp UP     &kp DOWN   &kp LBKT  &kp RBKT   &mo 0
+&kp ESC    &kp N1   &kp N2    &kp N3    &kp N4     &kp N5  &to 0                                                        &mo 4      &kp N6  &kp N7     &kp N8     &kp N9    &kp N0     &kp LBRC
+&kp TAB    &kp P    &kp T     &kp F     &kp K      &kp L   &trans                                                       &trans     &kp B   &kp A      &kp S      &kp G     &kp V      &kp Z
+&mo 6      &kp D    &kp H     &kp SEMI  &kp O      &kp I   &trans    &kp LCTRL  &kp LALT      &kp LGUI       &kp RCTRL  &trans     &kp U   &kp SLASH  &kp Y      &kp E     &kp X      &kp C
+&kp LSHFT  &kp SQT  &kp Q     &kp R     &kp W      &kp N                        &kp CAPS      &kp BACKSLASH                        &kp J   &kp M      &kp COMMA  &kp DOT   &kp MINUS  &kp RSHFT
+&mo 0      &trans   &kp LGUI  &kp LEFT  &kp RIGHT          &kp BSPC  &kp DEL    &mo 2         &kp RIGHT_ALT  &kp ENTER  &kp SPACE          &kp UP     &kp DOWN   &kp LBKT  &kp RBKT   &mo 0
             >;
         };
 
-    /* Keymap 6:
+        /* Keymap 6:
      *
      * Hardware Neo2 Layer 3 (HMod3)
      *
@@ -405,7 +409,7 @@
             >;
         };
 
-    /* Keymap 7:
+        /* Keymap 7:
      *
      * Media Keys (Media)
      *
@@ -442,7 +446,7 @@
             >;
         };
 
-    /* Keymap 8:
+        /* Keymap 8:
      *
      * Apple MacOS Modifications (MacOS)
      *
@@ -468,7 +472,6 @@
      *                                 `--------------------'       `--------------------'
      */
 
-
         macos {
             display-name = "MacOS";
             bindings = <
@@ -480,8 +483,7 @@
             >;
         };
 
-
-    /* Keymap 9:
+        /* Keymap 9:
      *
      * Windows Modifications (Win)
      *
@@ -510,15 +512,15 @@
         win {
             display-name = "Windows";
             bindings = <
-&trans  &trans  &trans  &trans  &trans     &trans  &trans                                        &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans     &trans  &trans                                        &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans     &trans  &trans  &trans    &trans      &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans     &trans                    &trans      &trans                  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans             &trans  &trans    &trans      &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans      &trans                  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans          &trans  &trans  &trans      &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans
             >;
         };
 
-    /* Keymap 10:
+        /* Keymap 10:
      *
      * MacOS Modifications for Hardware Neo2 Layer 3 (MacOSHMod3)
      *
@@ -547,15 +549,15 @@
         macos_hw_layer_3 {
             display-name = "MacOSHWLayer3";
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans     &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans     &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans     &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                     &trans      &trans                  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans             &trans  &trans  &trans      &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans      &trans                  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans          &trans  &trans  &trans      &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans
             >;
         };
 
-    /* Keymap 11:
+        /* Keymap 11:
      *
      * Windows Modifications for Hardware Neo2 Layer 3 (WindowsHMod3)
      *
@@ -584,15 +586,15 @@
         win_hw_layer_3 {
             display-name = "WindowsHWLayer3";
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans     &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans     &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans     &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                     &trans      &trans                  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans             &trans  &trans  &trans      &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans      &trans                  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans          &trans  &trans  &trans      &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans
             >;
         };
 
-    /* Keymap 12:
+        /* Keymap 12:
      *
      * Emacs Modifications (EmacsLayer1)
      *
@@ -621,13 +623,26 @@
         emacs_layer_1 {
             display-name = "EmacsLayer1";
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans     &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans     &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans     &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                     &trans      &trans                  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans             &trans  &trans  &trans      &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans      &trans                  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans          &trans  &trans  &trans      &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans
             >;
         };
+    };
 
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+
+        MacOS_HW_Mod3 {
+            if-layers = <6 8>;
+            then-layer = <10>;
+        };
+
+        Win_HW_Mod3 {
+            if-layers = <6 9>;
+            then-layer = <11>;
+        };
     };
 };
