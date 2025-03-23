@@ -7,6 +7,20 @@
 
 #define AS(keycode) &as LS(keycode) keycode     // Autoshift Macro
 
+#define LAYER_BASE   0
+#define LAYER_NEO    1
+#define LAYER_KP     2
+#define LAYER_FN     3
+#define LAYER_MOD    4
+#define LAYER_QWERT  5
+#define LAYER_MOD3   6
+#define LAYER_MEDIA  7
+#define LAYER_MACOS  8
+#define LAYER_WIN    9
+#define LAYER_MACOS_MOD3    10
+#define LAYER_WIN_MOD3      11
+#define LAYER_EMACS_1       12
+
 / {
     behaviors {
         #include "macros.dtsi"
@@ -114,15 +128,15 @@
          * Tap Dance 0 (td0): tap multiple times for different outcomes
          *
          * Tap 1 (kp ESC)
-         * Tap 2 (mo 2) (Neo)
-         * Tap 3 (mo 5) (QWERTY)
+         * Tap 2 (mo LAYER_NEO) (Neo)
+         * Tap 3 (mo LAYER_QWERT) (QWERTY)
          */
 
         td0: tap_dance_0 {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&kp ESC>, <&mo 2>, <&mo 5>;
+            bindings = <&kp ESC>, <&mo LAYER_NEO>, <&mo LAYER_QWERT>;
 
             label = "TapDance-Neo-QWERT";
         };
@@ -179,11 +193,11 @@
         default_layer {
             display-name = "Base";
             bindings = <
-&kp EQUAL        &kp N1      &kp N2        &kp N3         &kp N4          &kp N5  &tog 1                                                              &mo 4                 &kp N6  &kp N7       &kp N8      &kp N9        &kp N0         &kp MINUS
-&kp TAB          &kp Q       &kp W         &kp E          &kp R           &kp T   &lt 2 LC(R)                                                         &htm RIGHT_ALT LC(Q)  &kp Y   &kp U        &kp I       &kp O         &kp P          &kp BSLH
+&kp EQUAL        &kp N1      &kp N2        &kp N3         &kp N4          &kp N5  &tog LAYER_NEO                                                              &mo LAYER_MOD              &kp N6  &kp N7       &kp N8      &kp N9        &kp N0         &kp MINUS
+&kp TAB          &kp Q       &kp W         &kp E          &kp R           &kp T   &lt LAYER_KPLC(R)                                                         &htm RIGHT_ALT LC(Q)  &kp Y   &kp U        &kp I       &kp O         &kp P          &kp BSLH
 &htm CAPS LA(T)  &hm LGUI A  &hm LSHIFT S  &hm LALT D     &hm LCTRL F     &kp G   &htm CAPS LA(H)  &kp LCTRL  &kp LALT      &kp LGUI       &kp RCTRL  &htm CAPS LA(Q)       &kp H   &hm RCTRL J  &hm RALT K  &hm RSHIFT L  &hm RGUI SEMI  &hm CAPS SQT
 &kp LSHFT        &kp Z       &kp X         &kp C          &kp V           &kp B                               &kp CAPS      &kp BACKSLASH                                   &kp N   &kp M        &kp COMMA   &kp DOT       &kp FSLH       &kp RSHFT
-&mo 3            &td0        &tog 2        &mt CAPS LEFT  &mt LGUI RIGHT          &kp LSHIFT       &kp SPACE  &mo 2         &kp RIGHT_ALT  &kp ENTER  &kp RSHIFT                    &kp UP       &kp DOWN    &kp LBKT      &kp RBKT       &mo 3
+&mo LAYER_FN            &td0        &tog LAYER_KP       &mt CAPS LEFT  &mt LGUI RIGHT          &kp LSHIFT       &kp SPACE  &mo LAYER_KP        &kp RIGHT_ALT  &kp ENTER  &kp RSHIFT                    &kp UP       &kp DOWN    &kp LBKT      &kp RBKT       &mo LAYER_FN
             >;
         };
 
@@ -216,11 +230,11 @@
         neo_layer {
             display-name = "Neo";
             bindings = <
-&kp EQUAL  &kp N1    &kp N2     &kp N3    &kp N4     &kp N5  &to 0                                       &mo 4   &kp N6  &kp N7  &kp N8     &kp N9    &kp N0    &kp MINUS
-&kp TAB    &kp X     &kp V      &kp L     &kp C      &kp W   &mo 2                                       &mo 2   &kp K   &kp H   &kp G      &kp F     &kp Q     &kp BSLH
-&mo 6      &kp U     &kp I      &kp A     &kp E      &kp O   &mo 6   &trans  &trans      &trans  &trans  &mo 6   &kp S   &kp N   &kp R      &kp T     &kp D     &kp Y
-&kp LSHFT  &kp LBKT  &kp SLASH  &kp SEMI  &kp P      &kp Z                   &trans      &mo 6                   &kp B   &kp M   &kp COMMA  &kp DOT   &kp J     &kp RSHFT
-&mo 3      &kp ESC   &td0       &kp LEFT  &kp RIGHT          &trans  &trans  &trans      &mo 2   &trans  &trans          &kp UP  &kp DOWN   &kp LBKT  &kp RBKT  &trans
+&kp EQUAL  &kp N1    &kp N2     &kp N3    &kp N4     &kp N5  &to LAYER_BASE                                       &mo LAYER_MOD  &kp N6  &kp N7  &kp N8     &kp N9    &kp N0    &kp MINUS
+&kp TAB    &kp X     &kp V      &kp L     &kp C      &kp W   &mo LAYER_KP                                      &mo LAYER_KP  &kp K   &kp H   &kp G      &kp F     &kp Q     &kp BSLH
+&mo LAYER_MOD3      &kp U     &kp I      &kp A     &kp E      &kp O   &mo LAYER_MOD3   &trans  &trans      &trans  &trans  &mo LAYER_MOD3   &kp S   &kp N   &kp R      &kp T     &kp D     &kp Y
+&kp LSHFT  &kp LBKT  &kp SLASH  &kp SEMI  &kp P      &kp Z                   &trans      &mo LAYER_MOD3                   &kp B   &kp M   &kp COMMA  &kp DOT   &kp J     &kp RSHFT
+&mo LAYER_FN      &kp ESC   &td0       &kp LEFT  &kp RIGHT          &trans  &trans  &trans      &mo LAYER_KP  &trans  &trans          &kp UP  &kp DOWN   &kp LBKT  &kp RBKT  &trans
             >;
         };
 
@@ -253,11 +267,11 @@
         keypad {
             display-name = "Kp";
             bindings = <
-&td0         &kp N1     &kp N2    &kp N3        &kp N4        &kp N5      &trans                                       &mo 4         &kp LA(O)  &kp KP_NUM    &kp KP_EQUAL  &kp KP_DIVIDE  &kp KP_MULTIPLY   &kp MINUS
+&td0         &kp N1     &kp N2    &kp N3        &kp N4        &kp N5      &trans                                       &mo LAYER_MOD        &kp LA(O)  &kp KP_NUM    &kp KP_EQUAL  &kp KP_DIVIDE  &kp KP_MULTIPLY   &kp MINUS
 &kp TAB      &kp PG_UP  &kp BSPC  &kp UP        &kp DEL       &kp PG_DN   &trans                                       &trans        &kp LC(U)  &kp KP_N7     &kp KP_N8     &kp KP_N9      &kp KP_MINUS      &kp BSLH
 &kp CAPS     &kp HOME   &kp LEFT  &kp DOWN      &kp RIGHT     &kp END     &trans  &trans  &trans      &trans  &trans   &trans        &kp LA(H)  &kp KP_N4     &kp KP_N5     &kp KP_N6      &kp KP_PLUS       &kp SQT
 &kp LSHFT    &kp ESC    &kp TAB   &kp LG(V)     &kp RET       &kp K_UNDO                  &trans      &trans                         &kp COLON  &kp KP_N1     &kp KP_N2     &kp KP_N3      &kp KP_ENTER      &kp RSHFT
-&mo_tog 7 5  &mo 6      &trans    &kp C_BRI_DN  &kp C_BRI_UP              &trans  &trans  &trans      &trans  &kp DEL  &kp NUMBER_0             &kp C_VOL_UP  &kp C_VOL_DN  &kp C_MUTE     &kp K_PLAY_PAUSE  &trans
+&mo_tog 7 5  &mo LAYER_MOD3      &trans    &kp C_BRI_DN  &kp C_BRI_UP              &trans  &trans  &trans      &trans  &kp DEL  &kp NUMBER_0             &kp C_VOL_UP  &kp C_VOL_DN  &kp C_MUTE     &kp K_PLAY_PAUSE  &trans
             >;
         };
 
@@ -290,7 +304,7 @@
         fn {
             display-name = "Fn";
             bindings = <
-&kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6  &to 5                                                 &mo 4   &kp F7  &kp F8  &kp F9  &kp F10  &kp F11  &kp F12
+&kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6  &to LAYER_QWERT                                                &mo LAYER_MOD  &kp F7  &kp F8  &kp F9  &kp F10  &kp F11  &kp F12
 &trans  &trans  &trans  &trans  &trans  &trans  &none                                                 &none   &trans  &trans  &trans  &trans   &trans   &trans
 &trans  &trans  &trans  &trans  &trans  &trans  &none      &trans      &trans      &kp K_APP  &trans  &none   &trans  &trans  &trans  &trans   &trans   &trans
 &trans  &trans  &trans  &trans  &trans  &trans                         &trans      &trans                     &trans  &trans  &trans  &trans   &trans   &trans
@@ -364,11 +378,11 @@
         qwert_layer {
             display-name = "QWERT";
             bindings = <
-&kp ESC    &kp N1   &kp N2    &kp N3    &kp N4     &kp N5  &to 0                                                        &mo 4      &kp N6  &kp N7     &kp N8     &kp N9    &kp N0     &kp LBRC
+&kp ESC    &kp N1   &kp N2    &kp N3    &kp N4     &kp N5  &to LAYER_BASE                                                        &mo LAYER_MOD     &kp N6  &kp N7     &kp N8     &kp N9    &kp N0     &kp LBRC
 &kp TAB    &kp P    &kp T     &kp F     &kp K      &kp L   &trans                                                       &trans     &kp B   &kp A      &kp S      &kp G     &kp V      &kp Z
-&mo 6      &kp D    &kp H     &kp SEMI  &kp O      &kp I   &trans    &kp LCTRL  &kp LALT      &kp LGUI       &kp RCTRL  &trans     &kp U   &kp SLASH  &kp Y      &kp E     &kp X      &kp C
+&mo LAYER_MOD3      &kp D    &kp H     &kp SEMI  &kp O      &kp I   &trans    &kp LCTRL  &kp LALT      &kp LGUI       &kp RCTRL  &trans     &kp U   &kp SLASH  &kp Y      &kp E     &kp X      &kp C
 &kp LSHFT  &kp SQT  &kp Q     &kp R     &kp W      &kp N                        &kp CAPS      &kp BACKSLASH                        &kp J   &kp M      &kp COMMA  &kp DOT   &kp MINUS  &kp RSHFT
-&mo 0      &trans   &kp LGUI  &kp LEFT  &kp RIGHT          &kp BSPC  &kp DEL    &mo 2         &kp RIGHT_ALT  &kp ENTER  &kp SPACE          &kp UP     &kp DOWN   &kp LBKT  &kp RBKT   &mo 0
+&mo LAYER_BASE     &trans   &kp LGUI  &kp LEFT  &kp RIGHT          &kp BSPC  &kp DEL    &mo LAYER_KP        &kp RIGHT_ALT  &kp ENTER  &kp SPACE          &kp UP     &kp DOWN   &kp LBKT  &kp RBKT   &mo 0
             >;
         };
 
@@ -401,7 +415,7 @@
         hw_layer_3 {
             display-name = "HWLayer3";
             bindings = <
-&trans  &trans     &trans     &trans    &trans     &trans     &trans                                      &mo 4   &trans     &trans     &trans    &trans     &trans     &trans
+&trans  &trans     &trans     &trans    &trans     &trans     &trans                                      &mo LAYER_MOD  &trans     &trans     &trans    &trans     &trans     &trans
 &trans  &kp UNDER  &kp UNDER  &kp LBKT  &kp RBKT   &kp CARET  &trans                                      &trans  &kp EXCL   &kp LT     &kp GT    &kp EQUAL  &kp AMPS   &trans
 &trans  &kp BSLH   &kp FSLH   &kp LBRC  &kp RBRC   &kp STAR   &trans  &none   &none       &trans  &none   &trans  &kp QMARK  &kp LPAR   &kp RPAR  &kp MINUS  &kp COLON  &kp AT
 &trans  &kp POUND  &kp DLLR   &kp PIPE  &kp TILDE  &kp GRAVE                  &none       &none                   &kp PLUS   &kp PRCNT  &kp DQT   &kp SQT    &kp SEMI   &trans
@@ -636,13 +650,13 @@
         compatible = "zmk,conditional-layers";
 
         MacOS_HW_Mod3 {
-            if-layers = <6 8>;
-            then-layer = <10>;
+            if-layers = <LAYER_MOD3 LAYER_MACOS>;
+            then-layer = <LAYER_MACOS_MOD3>;
         };
 
         Win_HW_Mod3 {
-            if-layers = <6 9>;
-            then-layer = <11>;
+            if-layers = <LAYER_MOD3 LAYER_WIN>;
+            then-layer = <LAYER_WIN_MOD3>;
         };
     };
 };
