@@ -153,14 +153,14 @@
      * ,--------------------------------------------------.           ,--------------------------------------------------.
      * |  Esc   |   1  |   2  |   3  |   4  |   5  | To 1 |           | To 4 |   6  |   7  |   8  |   9  |   0  |   -    |
      * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
-     * |  Tab   |   X  |   V  |   L  |   C  |   W  | C-c  |           | C-x  |   K  |   H  |   G  |   F  |   Q  |   ß    |
+     * |  Tab   |   X  |   V  |   L  |   C  |   W  | C-c  |           | C-x  |   K  |   H  |   G  |   F  |   Q  |   ß  \ |
      * |--------+------+------+------+------+------|------|           |------|------+------+------+------+------+--------|
      * |  M-w   |   U  |   I  |   A  |   E  |   O  | M-s  |           | M-x  |   S  |   N  |   R  |   T  |   D  |   Y    |
-     * |  CAPS  | LGUI | LSHFT| LALT | LCTRL|      |      |           |      |      | RCTRL| RALT | RSHFT| RGUI | CAPS   |
+     * |  CAPS  | LGUI | LSHFT| LALT | LCTRL|      |      |           |      |      | RCTRL| RALT | RSHFT| RGUI | CAPS   | <-- Homerow Mods
      * |--------+------+------+------+------+------|------'           `------|------+------+------+------+------+--------|
      * |  LSft  |   Ü  |   Ö  |   Ä  |   P  |   Z  |                         |   B  |   M  |   ,  |   .  |   J  |  RSft  |
      * |--------+------+------+------+------+------'                         `------+------+------+------+------+--------|
-     * |  Fn    | ESC  | Kp   | LEFT | RIGHT|                                       |  UP  | DOWN |      |      | Fn     |
+     * |  Fn    | ESC  | Kp   | LEFT | RIGHT|                                       |  UP  | DOWN |   [  |   ]  | Fn     |
      * `------------------------------------'                                       `------------------------------------'
      *                                        ,-------------.       ,-------------.
      *                                        | CTRL | ALT  |       | LGUI | CTRL |
@@ -338,22 +338,22 @@
      * This is the poor mans QWERTY. Sometimes you need to enter in qwerty even if neo is active.
      *
      * ,--------------------------------------------------.           ,--------------------------------------------------.
-     * |  trans | trans| trans| trans| trans| trans| trans|           | trans| trans| trans| trans| trans| trans| trans  |
+     * |  Esc   |   1  |   2  |   3  |   4  |   5  | To 0 |           | To 4 |   6  |   7  |   8  |   9  |   0  |   -    |
      * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
-     * |  trans | trans| trans| trans| trans| trans| trans|           | trans| trans| trans| trans| trans| trans| trans  |
+     * |  Tab   |   Q  |   W  |   E  |   R  |   T  | trans|           | trans|   Z  |   U  |   I  |   O  |   P  |  Ü [   |
      * |--------+------+------+------+------+------|------|           |------|------+------+------+------+------+--------|
-     * |  trans | trans| trans| trans| trans| trans| trans|           | trans| trans| trans| trans| trans| trans| trans  |
+     * | HMod3  |   A  |   S  |   D  |   F  |   G  | trans|           | trans|   H  |   J  |   K  |   L  |  Ö : |  Ä ;   |
      * |--------+------+------+------+------+------|------'           `------|------+------+------+------+------+--------|
-     * |  trans | trans| trans| trans| trans| trans|                         | trans| trans| trans| trans| trans| trans  |
+     * |  LSft  |   Y  |   X  |   C  |   V  |   B  |                         |   N  |   M  |   ,  |   .  |   /  |  RSft  |
      * |--------+------+------+------+------+------'                         `------+------+------+------+------+--------|
-     * |  trans | trans| trans| trans| trans|                                       | trans| trans| trans| trans| trans  |
+     * |  Mo 0  | trans| LGUI | LEFT | RIGHT|                                       |  UP  | DOWN |   [  |   ]  | Fn     |
      * `------------------------------------'                                       `------------------------------------'
      *                                        ,-------------.       ,-------------.
-     *                                        | trans| trans|       | trans| trans|
+     *                                        | LCTL | LALT |       | LGUI | RCTL |
      *                                 ,------|------|------|       |------+------+------.
-     *                                 |      |      | trans|       | trans|      |      |
-     *                                 | trans| trans|------|       |------| trans| trans|
-     *                                 |      |      | trans|       | trans|      |      |
+     *                                 |      |      | CAPS |       | \    |      |      |
+     *                                 | BSPC | DEL  |------|       |------| RET  | Space|
+     *                                 |      |      |HMod4 |       | RALT |      |      |
      *                                 `--------------------'       `--------------------'
      */
 
@@ -362,9 +362,9 @@
             bindings = <
 &kp ESC    &kp N1   &kp N2        &kp N3    &kp N4     &kp N5  &to 0                                                        &mo 4      &kp N6  &kp N7     &kp N8     &kp N9    &kp N0     &kp LBRC
 &kp TAB    &kp P    &kp T         &kp F     &kp K      &kp L   &trans                                                       &trans     &kp B   &kp A      &kp S      &kp G     &kp V      &kp Z
-&kp CAPS   &kp D    &kp H         &kp SEMI  &kp O      &kp I   &trans    &kp LCTRL  &kp LALT      &kp LGUI       &kp RCTRL  &trans     &kp U   &kp SLASH  &kp Y      &kp E     &kp X      &kp C
+&mo 6      &kp D    &kp H         &kp SEMI  &kp O      &kp I   &trans    &kp LCTRL  &kp LALT      &kp LGUI       &kp RCTRL  &trans     &kp U   &kp SLASH  &kp Y      &kp E     &kp X      &kp C
 &kp LSHFT  &kp SQT  &kp Q         &kp R     &kp W      &kp N                        &kp CAPS      &kp BACKSLASH                        &kp J   &kp M      &kp COMMA  &kp DOT   &kp MINUS  &kp RSHFT
-&mo 0      &trans   &macro_jp0 A  &kp LEFT  &kp RIGHT          &kp BSPC  &kp DEL    &mo 2         &kp RIGHT_ALT  &kp ENTER  &kp SPACE          &kp UP     &kp DOWN   &kp LBKT  &kp RBKT   &mo 0
+&mo 0      &trans   &kp LGUI      &kp LEFT  &kp RIGHT          &kp BSPC  &kp DEL    &mo 2         &kp RIGHT_ALT  &kp ENTER  &kp SPACE          &kp UP     &kp DOWN   &kp LBKT  &kp RBKT   &mo 0
             >;
         };
 
