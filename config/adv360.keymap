@@ -8,8 +8,14 @@
 / {
     behaviors {
         #include "macros.dtsi"
-      #include "version.dtsi"
+        #include "version.dtsi"
 
+        /*
+         * Homerow Mods (hm): hold-preferred
+         *
+         * Hold (kp <1>)
+         * Tap  (kp <2>)
+         */
         hm: homerow_mods {
             compatible = "zmk,behavior-hold-tap";
             label = "HOMEROW_MODS";
@@ -20,13 +26,38 @@
             bindings = <&kp>, <&kp>;
         };
 
+        /*
+         * Tap Dance 0 (td0):
+         *
+         * Tap 1 (kp <1>)
+         * Tap 2 (mo 2) (Neo)
+         * Tap 3 (mo 5) (QWERTY)
+         */
         td0: tap_dance_0 {
             compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
+            #binding-cells = <1>;
             tapping-term-ms = <200>;
-            bindings = <&kp ESC>, <&mo 2>, <&mo 5>;
+            bindings = <&kp>, <&mo 2>, <&mo 5>;
 
-            label = "Esc-L2-L5";
+            label = "TapDance-Neo-QWERT";
+        };
+
+        /*
+         * Layer Tap 2 (lt2): hold-preferred
+         *
+         * Hold (400ms)
+         *   Momentary (mo <1>)
+         * Tap
+         *   Toggle (tog <2>)
+         */
+        lt2: layer_tap_2 {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "hold-preferred";
+            tapping-term-ms = <400>;
+            quick-tap-ms = <200>;
+            bindings = <&mo>, <&tog>;
+            hold-trigger-key-positions = <1>;    // <---[[the W key]]
         };
     };
 
@@ -51,38 +82,144 @@
     keymap {
         compatible = "zmk,keymap";
 
+
+    /* Keymap 0:
+     *
+     * Default Layer (Neo2, original QWERTY)
+     *
+     * This is mostly just the standard Layout with some modifications.
+     *
+     * ,--------------------------------------------------.           ,--------------------------------------------------.
+     * |  Esc   |   1  |   2  |   3  |   4  |   5  | To 1 |           | To 4 |   6  |   7  |   8  |   9  |   0  |   -    |
+     * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
+     * |  Tab   |   X  |   V  |   L  |   C  |   W  | C-c  |           | C-x  |   K  |   H  |   G  |   F  |   Q  |   ß    |
+     * |--------+------+------+------+------+------|------|           |------|------+------+------+------+------+--------|
+     * |  CAPS  |   U  |   I  |   A  |   E  |   O  | M-s  |           | M-x  |   S  |   N  |   R  |   T  |   D  |   Y    |
+     * |--------+------+------+------+------+------|------'           `------|------+------+------+------+------+--------|
+     * |  LSft  |   Ü  |   Ö  |   Ä  |   P  |   Z  |                         |   B  |   M  |   ,  |   .  |   J  |  RSft  |
+     * |--------+------+------+------+------+------'                         `------+------+------+------+------+--------|
+     * |  Fn    | ESC  | Kp   | LEFT | RIGHT|                                       |  UP  | DOWN |      |      | Fn     |
+     * `------------------------------------'                                       `------------------------------------'
+     *                                        ,-------------.       ,-------------.
+     *                                        | CTRL | ALT  |       | LGUI | CTRL |
+     *                                 ,------|------|------|       |------+------+------.
+     *                                 |      |      | Mod3 |       | Mod3 |      |      |
+     *                                 | SHIFT| SPC  |------|       |------| RET  | SHIFT|
+     *                                 |      |      | Mod4 |       | Mod4 |      |      |
+     *                                 `--------------------'       `--------------------'
+     */
+
         default_layer {
             display-name = "Base";
             bindings = <
-&kp EQUAL  &kp N1  &kp N2  &kp N3         &kp N4          &kp N5  &to 1                                                              &mo 4                &kp N6  &kp N7  &kp N8     &kp N9    &kp N0    &kp MINUS
+&kp EQUAL  &kp N1  &kp N2  &kp N3         &kp N4          &kp N5  &tog 1                                                             &mo 4                &kp N6  &kp N7  &kp N8     &kp N9    &kp N0    &kp MINUS
 &kp TAB    &kp Q   &kp W   &kp E          &kp R           &kp T   &lt 2 LC(R)                                                        &hm RIGHT_ALT LC(Q)  &kp Y   &kp U   &kp I      &kp O     &kp P     &kp BSLH
 &kp CAPS   &kp A   &kp S   &kp D          &kp F           &kp G   &hm CAPS LA(H)  &kp LCTRL  &kp LALT      &kp LGUI       &kp RCTRL  &hm CAPS LA(Q)       &kp H   &kp J   &kp K      &kp L     &kp SEMI  &kp SQT
 &kp LSHFT  &kp Z   &kp X   &kp C          &kp V           &kp B                              &kp CAPS      &kp BACKSLASH                                  &kp N   &kp M   &kp COMMA  &kp DOT   &kp FSLH  &kp RSHFT
-&mo 3      &td0    &to 2   &mt CAPS LEFT  &mt LGUI RIGHT          &kp LSHIFT      &kp SPACE  &mo 2         &kp RIGHT_ALT  &kp ENTER  &kp RSHIFT                   &kp UP  &kp DOWN   &kp LBKT  &kp RBKT  &mo 3
+&mo 3      &td0 ESC &tog 2 &mt CAPS LEFT  &mt LGUI RIGHT          &kp LSHIFT      &kp SPACE  &mo 2         &kp RIGHT_ALT  &kp ENTER  &kp RSHIFT                   &kp UP  &kp DOWN   &kp LBKT  &kp RBKT  &mo 3
             >;
         };
+
+
+    /* Keymap 1:
+     *
+     * Hardware Neo2
+     *
+     * This is a hardware implementation of Neo2. Allowing to type in Neo2 even if it is not installed.
+     *
+     * ,--------------------------------------------------.           ,--------------------------------------------------.
+     * |  Esc   |   1  |   2  |   3  |   4  |   5  | To 0 |           | To 4 |   6  |   7  |   8  |   9  |   0  |   -    |
+     * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
+     * |  Tab   |   X  |   V  |   L  |   C  |   W  | C-c  |           | C-x  |   K  |   H  |   G  |   F  |   Q  |   ß    |
+     * |--------+------+------+------+------+------|------|           |------|------+------+------+------+------+--------|
+     * | HMod3  |   U  |   I  |   A  |   E  |   O  | M-s  |           | M-x  |   S  |   N  |   R  |   T  |   D  |   Y    |
+     * |--------+------+------+------+------+------|------'           `------|------+------+------+------+------+--------|
+     * |  LSft  |  Ü [ |  Ö / |  Ä ; |   P  |   Z  |                         |   B  |   M  |   ,  |   .  |   J  |  RSft  |
+     * |--------+------+------+------+------+------'                         `------+------+------+------+------+--------|
+     * |  Fn    | ESC  | LGUI | LEFT | RIGHT|                                       |  UP  | DOWN |   [  |   ]  | Fn     |
+     * `------------------------------------'                                       `------------------------------------'
+     *                                        ,-------------.       ,-------------.
+     *                                        | trans| trans|       | trans| trans|
+     *                                 ,------|------|------|       |------+------+------.
+     *                                 |      |      | trans|       | Mod3 |      |      |
+     *                                 | trans| trans|------|       |------| trans| trans|
+     *                                 |      |      | trans|       | Mod4 |      |      |
+     *                                 `--------------------'       `--------------------'
+     */
 
         neo_layer {
             display-name = "Neo";
             bindings = <
 &kp EQUAL  &kp N1    &kp N2     &kp N3    &kp N4     &kp N5  &to 0                                       &mo 4   &kp N6  &kp N7  &kp N8     &kp N9    &kp N0    &kp MINUS
 &kp TAB    &kp X     &kp V      &kp L     &kp C      &kp W   &mo 2                                       &mo 2   &kp K   &kp H   &kp G      &kp F     &kp Q     &kp BSLH
-&kp CAPS   &kp U     &kp I      &kp A     &kp E      &kp O   &mo 6   &trans  &trans      &trans  &trans  &mo 6   &kp S   &kp N   &kp R      &kp T     &kp D     &kp Y
+&mo 6      &kp U     &kp I      &kp A     &kp E      &kp O   &mo 6   &trans  &trans      &trans  &trans  &mo 6   &kp S   &kp N   &kp R      &kp T     &kp D     &kp Y
 &kp LSHFT  &kp LBKT  &kp SLASH  &kp SEMI  &kp P      &kp Z                   &trans      &mo 6                   &kp B   &kp M   &kp COMMA  &kp DOT   &kp J     &kp RSHFT
-&mo 3      &kp ESC   &td0       &kp LEFT  &kp RIGHT          &trans  &trans  &trans      &mo 2   &trans  &trans          &kp UP  &kp DOWN   &kp LBKT  &kp RBKT  &trans
+&mo 3      &kp ESC   &td0 LGUI  &kp LEFT  &kp RIGHT          &trans  &trans  &trans      &mo 2   &trans  &trans          &kp UP  &kp DOWN   &kp LBKT  &kp RBKT  &trans
             >;
         };
+
+    /* Keymap 2:
+     *
+     * Keypad (Kp, Mod4)
+     *
+     * This is a hardware implementation of the Neo2-Mod4 Keypad Layer.
+     *
+     * ,--------------------------------------------------.           ,--------------------------------------------------.
+     * |  Esc   | trans| trans| trans| trans| trans| trans|           | To 4 | M-f  |  NUM |   =  |   /  |   *  |   -    |
+     * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
+     * |  Tab   | Pg_Up| BKSP |  UP  |  DEL | Pg_Dn| trans|           | trans| C-h  |   7  |   8  |   9  |   -  |   \    |
+     * |--------+------+------+------+------+------|------|           |------|------+------+------+------+------+--------|
+     * |  Mod3  | HOME | LEFT | DOWN | RIGHT| END  | trans|           | trans| M-s  |   4  |   5  |   6  |   +  |   '    |
+     * |--------+------+------+------+------+------|------'           `------|------+------+------+------+------+--------|
+     * |  LSft  | ESC  |  TAB | INS  | RET  | UNDO |                         |   :  |   1  |   2  |   3  |  RET |  RSft  |
+     * |--------+------+------+------+------+------'                         `------+------+------+------+------+--------|
+     * |  MacOST|HMod3 | trans| BriDn| BriUp|                                       | VolUp| VolDn| MUTE | PLAY | Fn     |
+     * `------------------------------------'                                       `------------------------------------'
+     *                                        ,-------------.       ,-------------.
+     *                                        | trans| trans|       | trans| trans|
+     *                                 ,------|------|------|       |------+------+------.
+     *                                 |      |      | trans|       | trans|      |      |
+     *                                 | trans| trans|------|       |------| DEL  |  0   |
+     *                                 |      |      | trans|       | trans|      |      |
+     *                                 `--------------------'       `--------------------'
+     */
 
         keypad {
             display-name = "Kp";
             bindings = <
-&kp EQUAL  &kp N1     &kp N2    &kp N3        &kp N4        &kp N5      &trans                                       &mo 4         &kp LA(O)  &kp KP_NUM    &kp KP_EQUAL  &kp KP_DIVIDE  &kp KP_MULTIPLY   &kp MINUS
+&td0 ESC   &kp N1     &kp N2    &kp N3        &kp N4        &kp N5      &trans                                       &mo 4         &kp LA(O)  &kp KP_NUM    &kp KP_EQUAL  &kp KP_DIVIDE  &kp KP_MULTIPLY   &kp MINUS
 &kp TAB    &kp PG_UP  &kp BSPC  &kp UP        &kp DEL       &kp PG_DN   &trans                                       &trans        &kp LC(U)  &kp KP_N7     &kp KP_N8     &kp KP_N9      &kp KP_MINUS      &kp BSLH
-&kp ESC    &kp HOME   &kp LEFT  &kp DOWN      &kp RIGHT     &kp END     &trans  &trans  &trans      &trans  &trans   &trans        &kp LA(H)  &kp KP_N4     &kp KP_N5     &kp KP_N6      &kp KP_PLUS       &kp SQT
+&kp CAPS   &kp HOME   &kp LEFT  &kp DOWN      &kp RIGHT     &kp END     &trans  &trans  &trans      &trans  &trans   &trans        &kp LA(H)  &kp KP_N4     &kp KP_N5     &kp KP_N6      &kp KP_PLUS       &kp SQT
 &kp LSHFT  &kp ESC    &kp TAB   &kp LG(V)     &kp RET       &kp K_UNDO                  &trans      &trans                         &kp COLON  &kp KP_N1     &kp KP_N2     &kp KP_N3      &kp KP_ENTER      &kp RSHFT
-&trans     &mo 4      &trans    &kp C_BRI_DN  &kp C_BRI_UP              &trans  &trans  &trans      &trans  &kp DEL  &kp NUMBER_0             &kp C_VOL_UP  &kp C_VOL_DN  &kp C_MUTE     &kp K_PLAY_PAUSE  &trans
+&lt2 7 5   &mo 6      &trans    &kp C_BRI_DN  &kp C_BRI_UP              &trans  &trans  &trans      &trans  &kp DEL  &kp NUMBER_0             &kp C_VOL_UP  &kp C_VOL_DN  &kp C_MUTE     &kp K_PLAY_PAUSE  &trans
             >;
         };
+
+    /* Keymap 3:
+     *
+     * Function Keys (Fn)
+     *
+     * This is the function layer (Fn).
+     *
+     * ,--------------------------------------------------.           ,--------------------------------------------------.
+     * |  F1    | F2   | F3   | F4   | F5   | F6   | To5  |           | Mo 4 | F7   |  F8  |  F9  | F10  | F11  | F12    |
+     * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans| trans| trans|           | trans| trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+------|------|           |------|------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans| trans| trans|           | trans| trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+------|------'           `------|------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans| trans|                         | trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+------'                         `------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans|                                       | trans| trans| trans| trans| trans  |
+     * `------------------------------------'                                       `------------------------------------'
+     *                                        ,-------------.       ,-------------.
+     *                                        | trans| trans|       | trans| trans|
+     *                                 ,------|------|------|       |------+------+------.
+     *                                 |      |      | trans|       | trans|      |      |
+     *                                 | trans| trans|------|       |------| trans| trans|
+     *                                 |      |      | trans|       | trans|      |      |
+     *                                 `--------------------'       `--------------------'
+     */
 
         fn {
             display-name = "Fn";
@@ -95,6 +232,32 @@
             >;
         };
 
+    /* Keymap 4:
+     *
+     * Keyboard Modification Layer (Mod)
+     *
+     * This is the Mod Layer.
+     *
+     * ,--------------------------------------------------.           ,--------------------------------------------------.
+     * |  trans | trans| trans| trans| trans| trans| trans|           | trans| trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans| trans| trans|           | trans| trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+------|------|           |------|------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans| trans| trans|           | trans| trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+------|------'           `------|------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans| trans|                         | trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+------'                         `------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans|                                       | trans| trans| trans| trans| trans  |
+     * `------------------------------------'                                       `------------------------------------'
+     *                                        ,-------------.       ,-------------.
+     *                                        | trans| trans|       | trans| trans|
+     *                                 ,------|------|------|       |------+------+------.
+     *                                 |      |      | trans|       | trans|      |      |
+     *                                 | trans| trans|------|       |------| trans| trans|
+     *                                 |      |      | trans|       | trans|      |      |
+     *                                 `--------------------'       `--------------------'
+     */
+
         mod {
             display-name = "Mod";
             bindings = <
@@ -106,6 +269,32 @@
             >;
         };
 
+    /* Keymap 5:
+     *
+     * QWERTY Layer (QWERT)
+     *
+     * This is the poor mans QWERTY. Sometimes you need to enter in qwerty even if neo is active.
+     *
+     * ,--------------------------------------------------.           ,--------------------------------------------------.
+     * |  trans | trans| trans| trans| trans| trans| trans|           | trans| trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans| trans| trans|           | trans| trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+------|------|           |------|------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans| trans| trans|           | trans| trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+------|------'           `------|------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans| trans|                         | trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+------'                         `------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans|                                       | trans| trans| trans| trans| trans  |
+     * `------------------------------------'                                       `------------------------------------'
+     *                                        ,-------------.       ,-------------.
+     *                                        | trans| trans|       | trans| trans|
+     *                                 ,------|------|------|       |------+------+------.
+     *                                 |      |      | trans|       | trans|      |      |
+     *                                 | trans| trans|------|       |------| trans| trans|
+     *                                 |      |      | trans|       | trans|      |      |
+     *                                 `--------------------'       `--------------------'
+     */
+
         qwert_layer {
             display-name = "QWERT";
             bindings = <
@@ -113,9 +302,35 @@
 &kp TAB    &kp P    &kp T         &kp F     &kp K      &kp L   &trans                                                       &trans     &kp B   &kp A      &kp S      &kp G     &kp V      &kp Z
 &kp CAPS   &kp D    &kp H         &kp SEMI  &kp O      &kp I   &trans    &kp LCTRL  &kp LALT      &kp LGUI       &kp RCTRL  &trans     &kp U   &kp SLASH  &kp Y      &kp E     &kp X      &kp C
 &kp LSHFT  &kp SQT  &kp Q         &kp R     &kp W      &kp N                        &kp CAPS      &kp BACKSLASH                        &kp J   &kp M      &kp COMMA  &kp DOT   &kp MINUS  &kp RSHFT
-&mo 0      &td0     &macro_jp0 A  &kp LEFT  &kp RIGHT          &kp BSPC  &kp DEL    &mo 2         &kp RIGHT_ALT  &kp ENTER  &kp SPACE          &kp UP     &kp DOWN   &kp LBKT  &kp RBKT   &mo 0
+&mo 0      &trans   &macro_jp0 A  &kp LEFT  &kp RIGHT          &kp BSPC  &kp DEL    &mo 2         &kp RIGHT_ALT  &kp ENTER  &kp SPACE          &kp UP     &kp DOWN   &kp LBKT  &kp RBKT   &mo 0
             >;
         };
+
+    /* Keymap 6:
+     *
+     * Hardware Neo2 Layer 3 (HMod3)
+     *
+     * This is the hardware implementation of the Neo2 Mod3 Layer (Special Characters).
+     *
+     * ,--------------------------------------------------.           ,--------------------------------------------------.
+     * |  trans | trans| trans| trans| trans| trans| trans|           | trans| trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans| trans| trans|           | trans| trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+------|------|           |------|------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans| trans| trans|           | trans| trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+------|------'           `------|------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans| trans|                         | trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+------'                         `------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans|                                       | trans| trans| trans| trans| trans  |
+     * `------------------------------------'                                       `------------------------------------'
+     *                                        ,-------------.       ,-------------.
+     *                                        | trans| trans|       | trans| trans|
+     *                                 ,------|------|------|       |------+------+------.
+     *                                 |      |      | trans|       | trans|      |      |
+     *                                 | trans| trans|------|       |------| trans| trans|
+     *                                 |      |      | trans|       | trans|      |      |
+     *                                 `--------------------'       `--------------------'
+     */
 
         hw_layer_3 {
             display-name = "HWLayer3";
@@ -128,7 +343,34 @@
             >;
         };
 
+    /* Keymap 7:
+     *
+     * Media Keys (Media)
+     *
+     * This is the hardware implementation of the Neo2 Mod3 Layer (Special Characters).
+     *
+     * ,--------------------------------------------------.           ,--------------------------------------------------.
+     * |  trans | trans| trans| trans| trans| trans| trans|           | trans| trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans| trans| trans|           | trans| trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+------|------|           |------|------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans| trans| trans|           | trans| trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+------|------'           `------|------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans| trans|                         | trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+------'                         `------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans|                                       | trans| trans| trans| trans| trans  |
+     * `------------------------------------'                                       `------------------------------------'
+     *                                        ,-------------.       ,-------------.
+     *                                        | trans| trans|       | trans| trans|
+     *                                 ,------|------|------|       |------+------+------.
+     *                                 |      |      | trans|       | trans|      |      |
+     *                                 | trans| trans|------|       |------| trans| trans|
+     *                                 |      |      | trans|       | trans|      |      |
+     *                                 `--------------------'       `--------------------'
+     */
+
         media {
+            display-name = "Media";
             bindings = <
 &trans  &trans  &trans  &trans  &trans  &trans     &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &kp K_WWW  &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
@@ -138,7 +380,35 @@
             >;
         };
 
-        mac_os {
+    /* Keymap 8:
+     *
+     * Apple MacOS Modifications (MacOS)
+     *
+     * This is the hardware implementation of the Neo2 Mod3 Layer (Special Characters).
+     *
+     * ,--------------------------------------------------.           ,--------------------------------------------------.
+     * |  trans | trans| trans| trans| trans| trans| trans|           | trans| trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans| trans| trans|           | trans| trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+------|------|           |------|------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans| trans| trans|           | trans| trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+------|------'           `------|------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans| trans|                         | trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+------'                         `------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans|                                       | trans| trans| trans| trans| trans  |
+     * `------------------------------------'                                       `------------------------------------'
+     *                                        ,-------------.       ,-------------.
+     *                                        | trans| trans|       | trans| trans|
+     *                                 ,------|------|------|       |------+------+------.
+     *                                 |      |      | trans|       | trans|      |      |
+     *                                 | trans| trans|------|       |------| trans| trans|
+     *                                 |      |      | trans|       | trans|      |      |
+     *                                 `--------------------'       `--------------------'
+     */
+
+
+        macos {
+            display-name = "MacOS";
             bindings = <
 &trans  &trans  &trans  &trans  &trans     &trans  &trans                                        &trans  &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans     &trans  &trans                                        &trans  &trans  &trans  &trans  &trans  &trans  &trans
@@ -147,5 +417,118 @@
 &trans  &trans  &trans  &trans  &kp LCTRL          &trans  &trans    &trans      &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans
             >;
         };
+
+
+    /* Keymap 9:
+     *
+     * Windows Modifications (Win)
+     *
+     * This is the hardware implementation of the Neo2 Mod3 Layer (Special Characters).
+     *
+     * ,--------------------------------------------------.           ,--------------------------------------------------.
+     * |  trans | trans| trans| trans| trans| trans| trans|           | trans| trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans| trans| trans|           | trans| trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+------|------|           |------|------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans| trans| trans|           | trans| trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+------|------'           `------|------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans| trans|                         | trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+------'                         `------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans|                                       | trans| trans| trans| trans| trans  |
+     * `------------------------------------'                                       `------------------------------------'
+     *                                        ,-------------.       ,-------------.
+     *                                        | trans| trans|       | trans| trans|
+     *                                 ,------|------|------|       |------+------+------.
+     *                                 |      |      | trans|       | trans|      |      |
+     *                                 | trans| trans|------|       |------| trans| trans|
+     *                                 |      |      | trans|       | trans|      |      |
+     *                                 `--------------------'       `--------------------'
+     */
+
+        win {
+            display-name = "Windows";
+            bindings = <
+&trans  &trans  &trans  &trans  &trans     &trans  &trans                                        &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans     &trans  &trans                                        &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans     &trans  &trans  &trans    &trans      &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans     &trans                    &trans      &trans                  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans             &trans  &trans    &trans      &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
+    /* Keymap 10:
+     *
+     * MacOS Modifications for Hardware Neo2 Layer 3 (MacOSHMod3)
+     *
+     * This is the hardware implementation of the Neo2 Mod3 Layer on MacOS (Special Characters).
+     *
+     * ,--------------------------------------------------.           ,--------------------------------------------------.
+     * |  trans | trans| trans| trans| trans| trans| trans|           | trans| trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans| trans| trans|           | trans| trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+------|------|           |------|------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans| trans| trans|           | trans| trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+------|------'           `------|------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans| trans|                         | trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+------'                         `------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans|                                       | trans| trans| trans| trans| trans  |
+     * `------------------------------------'                                       `------------------------------------'
+     *                                        ,-------------.       ,-------------.
+     *                                        | trans| trans|       | trans| trans|
+     *                                 ,------|------|------|       |------+------+------.
+     *                                 |      |      | trans|       | trans|      |      |
+     *                                 | trans| trans|------|       |------| trans| trans|
+     *                                 |      |      | trans|       | trans|      |      |
+     *                                 `--------------------'       `--------------------'
+     */
+
+        macos_hw_layer_3 {
+            display-name = "MacOSHWLayer3";
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans     &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans     &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans     &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                     &trans      &trans                  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans             &trans  &trans  &trans      &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
+    /* Keymap 11:
+     *
+     * Windows Modifications for Hardware Neo2 Layer 3 (WindowsHMod3)
+     *
+     * This is the hardware implementation of the Neo2 Mod3 Layer on Windows (Special Characters).
+     *
+     * ,--------------------------------------------------.           ,--------------------------------------------------.
+     * |  trans | trans| trans| trans| trans| trans| trans|           | trans| trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans| trans| trans|           | trans| trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+------|------|           |------|------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans| trans| trans|           | trans| trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+------|------'           `------|------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans| trans|                         | trans| trans| trans| trans| trans| trans  |
+     * |--------+------+------+------+------+------'                         `------+------+------+------+------+--------|
+     * |  trans | trans| trans| trans| trans|                                       | trans| trans| trans| trans| trans  |
+     * `------------------------------------'                                       `------------------------------------'
+     *                                        ,-------------.       ,-------------.
+     *                                        | trans| trans|       | trans| trans|
+     *                                 ,------|------|------|       |------+------+------.
+     *                                 |      |      | trans|       | trans|      |      |
+     *                                 | trans| trans|------|       |------| trans| trans|
+     *                                 |      |      | trans|       | trans|      |      |
+     *                                 `--------------------'       `--------------------'
+     */
+
+        win_hw_layer_3 {
+            display-name = "WindowsHWLayer3";
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans     &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans     &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans     &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                     &trans      &trans                  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans             &trans  &trans  &trans      &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
     };
 };
