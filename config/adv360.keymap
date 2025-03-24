@@ -768,8 +768,8 @@
             display-name = "MouseLayer";
             bindings = <
 &trans  &trans  &trans  &trans  &trans  &trans  &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &mmv MOVE_UP  &trans  &trans  &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &trans  &mkp MB3  &mkp MB3  &mkp MB3      &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &mmv MOVE_UP  &trans  &trans  &trans                                      &trans  &trans  &trans  &msc SCRL_UP  &trans  &trans  &trans
+&trans  &trans  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &trans  &trans  &mkp MB3  &mkp MB3      &trans  &trans  &trans  &trans  &msc SCRL LEFT  &msc SCRL_DOWN  &msc SCRL_RIGHT  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans                  &trans      &mkp MB3                  &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans          &trans  &trans  &trans      &mkp MB3  &mkp MB1  &mkp MB2          &trans  &trans  &trans  &trans  &trans
             >;
