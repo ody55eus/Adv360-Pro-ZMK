@@ -352,8 +352,8 @@
 &kp EQUAL  &kp N1    &kp N2     &kp N3    &kp N4     &kp N5  &trans                                      &mo 4   &kp N6  &kp N7  &kp N8     &kp N9    &kp N0    &kp MINUS
 &kp TAB    &kp X     &kp V      &kp L     &kp C      &kp W   &mo 2                                       &mo 2   &kp K   &kp H   &kp G      &kp F     &kp Q     &kp BSLH
 &mo 6      &kp U     &kp I      &kp A     &kp E      &kp O   &mo 6   &trans  &trans      &trans  &trans  &mo 6   &kp S   &kp N   &kp R      &kp T     &kp D     &kp Y
-&key_repeat  &kp LBKT  &kp SLASH  &kp SEMI  &kp P    &kp Z                   &trans      &mo 6                   &kp B   &kp M   &kp COMMA  &kp DOT   &kp J     &kp RSHFT
-&mo_sl 2 3 &kp ESC   &td0       &kp LEFT  &kp RIGHT          &trans  &trans  &trans      &mo 2   &trans  &trans          &kp UP  &kp DOWN   &kp LBKT  &kp RBKT  &trans
+&key_repeat  &kp LBKT  &kp SLASH  &kp SEMI  &kp P    &kp Z                   &mo 6       &mo 6                   &kp B   &kp M   &kp COMMA  &kp DOT   &kp J     &kp RSHFT
+&mo_sl 2 3 &kp ESC   &td0       &kp LEFT  &kp RIGHT          &trans  &trans  &mo 2       &mo 2   &trans  &trans          &kp UP  &kp DOWN   &kp LBKT  &kp RBKT  &trans
             >;
         };
 
@@ -769,9 +769,9 @@
             bindings = <
 &trans  &trans  &trans  &trans  &trans  &trans  &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &mmv MOVE_UP  &trans  &trans  &trans                                      &trans  &trans  &trans  &msc SCRL_UP  &trans  &trans  &trans
-&trans  &trans  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &trans  &trans  &mkp MB3  &mkp MB3      &trans  &trans  &trans  &trans  &msc SCRL_LEFT  &msc SCRL_DOWN  &msc SCRL_RIGHT  &trans  &trans
+&trans  &trans  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &trans  &trans  &mkp MB3  &mkp MB3      &mkp MB3  &mkp MB3      &trans  &trans  &msc SCRL_LEFT  &msc SCRL_DOWN  &msc SCRL_RIGHT  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans                  &trans      &mkp MB3                  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans          &trans  &trans  &trans      &mkp MB3  &mkp MB1  &mkp MB2          &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans          &mkp MB2  &mkp MB1  &trans      &mkp MB3  &mkp MB1  &mkp MB2          &trans  &trans  &trans  &trans  &trans
             >;
         };
     };
