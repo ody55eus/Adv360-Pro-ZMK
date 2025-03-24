@@ -202,7 +202,7 @@
         m_excl_spc: morph_excl_space {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&macro_jp0 DOT>, <&macro_jp0 EXCL>;
+            bindings = <&macro_spc>, <&kp SPACE>;
             mods = <(MOD_LCTL|MOD_RCTL)>;
         };
         m_dot_spc: morph_dot_space {
@@ -215,13 +215,12 @@
     };
 
     macros {
-        macro_jp0: macro_jp0 {
+        macro_spc: macro_spc {
             compatible = "zmk,behavior-macro-one-param";
             #binding-cells = <1>;
             bindings =
-                <&macro_param_1to1 &kp MACRO_PLACEHOLDER &kp SPACE &sk LSHFT>;
+                <&kp DOT &kp SPACE &sk LSHFT>;
 
-            label = "MACRO_JP0";
             wait-ms = <0>;
             tap-ms = <5>;
         };
