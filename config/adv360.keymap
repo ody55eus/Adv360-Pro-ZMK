@@ -117,7 +117,7 @@
             compatible = "zmk,behavior-hold-tap";
             label = "HOMEROW_MODS";
             #binding-cells = <2>;
-            tapping-term-ms = <150>;
+            tapping-term-ms = <250>;
             quick-tap-ms = <175>;
             require-prior-idle-ms = <125>;
             flavor = "tap-preferred";
@@ -127,13 +127,14 @@
         /*
          * cross-hand only modifiers, using tap-unless-interrupted and positional hold-tap (hold-trigger-key-positions)
          */
-
+	 
         lh_pht: left_positional_hold_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-unless-interrupted";
             tapping-term-ms = <200>;   // how long a key must be pressed to trigger the "hold" behavior
-            quick-tap-ms = <200>;      // press key again within quick-tap-ms to tap
+            quick-tap-ms = <175>;      // press key again within quick-tap-ms to tap
+            require-prior-idle-ms = <125>;
             bindings = <&kp>, <&kp>;
 
             // press any key not listed in hold-trigger-key-positions
@@ -146,8 +147,8 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-unless-interrupted";
-            tapping-term-ms = <200>;
-            quick-tap-ms = <200>;
+            tapping-term-ms = <150>;
+            quick-tap-ms = <400>;
             bindings = <&kp>, <&kp>;
 
             hold-trigger-key-positions = <29 30 31 32 33>;
@@ -343,11 +344,11 @@
 
         td2: tap_dance_2 {
             compatible = "zmk,behavior-tap-dance";
-            label = "TD1";
+            label = "TD2";
             #binding-cells = <0>;
             tapping-term-ms = <150>;
             bindings =
-                <&htm CAPS RC(T)>, // Hold:  CAPS   Tap: C-w
+                <&htm CAPS RC(Q)>, // Hold:  CAPS   Tap: C-x
                 <&htm RGUI LA(T)>, // Hold:  RGUI   Tap: M-w
                 <&htm RCTRL RC(SQT)>; // Hold: RCTL   Tap: C-y
         };
