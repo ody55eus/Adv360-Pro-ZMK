@@ -131,7 +131,7 @@
         // Hold: Momentary new layer (mo <1>).
         lt_spc: behavior_lt_spc {
             compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <1>;
+            #binding-cells = <2>;
             flavor = "balanced";
             tapping-term-ms = <200>;
             quick-tap-ms = <200>;
