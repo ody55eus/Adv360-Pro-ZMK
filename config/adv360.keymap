@@ -335,7 +335,7 @@
             #binding-cells = <0>;
             bindings = <&kp SPC>, <&m_excl_spc>;
 
-            mods = <(MOD_LCTRL|MOD_RCTRL)>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
         m_emacs12: morph_emacs12 {
@@ -344,7 +344,7 @@
             bindings = <&kp RC(R)>,    // C-c
 	               <&kp RC(U)>;    // C-h
 
-            mods = <(MOD_LSFT|MOD_RSFT)>;
+            mods = <(MOD_LCTL|MOD_RCTL)>;
         };
 
         m_emacs1: morph_emacs1 {
