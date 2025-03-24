@@ -749,6 +749,17 @@
 &trans  &trans  &trans  &trans  &trans          &trans  &trans  &trans      &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans
             >;
         };
+
+        mouse_layer_1 {
+            display-name = "MouseLayer";
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans  &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &mmv MOVE_UP  &trans  &trans  &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &trans  &mkp MB3  &mkp MB3  &mkp MB3      &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans      &mkp MB3                  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans          &trans  &trans  &trans      &mkp MB3  &mkp MB1  &mkp MB2          &trans  &trans  &trans  &trans  &trans
+            >;
+        };
     };
 
     conditional_layers {
@@ -772,11 +783,18 @@
     combos {
         compatible = "zmk,combos";
 
-        // Test Combo
-        combo_esc {
+        // Caps Combo (Thumbs)
+        combo_caps {
             timeout-ms = <50>;
             key-positions = <65 70>;
             bindings = <&caps_word>;
+        };
+
+        // Other Combo (Thumbs)
+        combo_other {
+            timeout-ms = <50>;
+            key-positions = <66 69>;
+            bindings = <&tog 13>;
         };
     };
 };
