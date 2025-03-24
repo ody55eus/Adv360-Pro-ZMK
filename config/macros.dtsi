@@ -1,3 +1,32 @@
+  m_mouse_up_left: Macro_Mouse_Up_Left {
+    compatible = "zmk,behavior-macro";
+    #binding-cells = <0>;
+    bindings = <&mmv MOVE_UP>, <&mmv MOVE_LEFT>;
+    wait-ms = <0>;
+    tap-ms = <5>;
+  };
+  m_mouse_up_right: Macro_Mouse_Up_Right {
+    compatible = "zmk,behavior-macro";
+    #binding-cells = <0>;
+    bindings = <&mmv MOVE_UP>, <&mmv MOVE_RIGHT>;
+    wait-ms = <0>;
+    tap-ms = <5>;
+  };
+  m_mouse_down_left: Macro_Mouse_Down_Left {
+    compatible = "zmk,behavior-macro";
+    #binding-cells = <0>;
+    bindings = <&mmv MOVE_DOWN>, <&mmv MOVE_LEFT>;
+    wait-ms = <0>;
+    tap-ms = <5>;
+  };
+  m_mouse_down_right: Macro_Mouse_Down_Right {
+    compatible = "zmk,behavior-macro";
+    #binding-cells = <0>;
+    bindings = <&mmv MOVE_DOWN>, <&mmv MOVE_RIGHT>;
+    wait-ms = <0>;
+    tap-ms = <5>;
+  };
+
   macro_spc: Macro_Dot_Space_Shift {
     compatible = "zmk,behavior-macro";
     #binding-cells = <0>;
