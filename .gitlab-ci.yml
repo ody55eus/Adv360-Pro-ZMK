@@ -1,7 +1,11 @@
-
-
  build:
   image: zmkfirmware/zmk-build-arm:stable
+
+  variables:
+    TIMESTAMP: $(date +"%Y%m%d%H%M")
+    COMMIT: $(echo "${CI_COMMIT_SHA}" | cut -c1-7)
+    BRANCH_NAME: $(echo "${CI_COMMIT_REF_SLUG}" | awk -F'/' '{print $3}' | cut -c1-4)
+    FILE_PREFIX: ${TIMESTAMP}-${COMMIT}
 
   cache:
     paths:
@@ -12,12 +16,8 @@
       - zmk
 
   before_script:
-    - timestamp=$(date +"%Y%m%d%H%M")
-    - echo "file_prefix=$file_prefix"
-    - commit=$(echo "${CI_COMMIT_SHA}" | cut -c1-7)
-    - branch_name=$(echo "${CI_COMMIT_REF_SLUG}" | awk -F'/' '{print $3}' | cut -c1-4)
-    - file_prefix=$timestamp-$commit
-    - bin/get_version.sh $branch_name $commit
+    - echo "file_prefix=$FILE_PREFIX"
+    - bin/get_version.sh $BRANCH_NAME $COMMIT
     - west init -l config
     - west update
     - west zephyr-export
@@ -27,9 +27,8 @@
     - grep -vE '(^#|^$)' build/left/zephyr/.config
     - west build -s zmk/app -d build/right -b adv360_right -- -DZMK_CONFIG="${CI_PROJECT_DIR}/config"
     - grep -vE '(^#|^$)' build/right/zephyr/.config
-    - cp build/left/zephyr/zmk.uf2 ${file_prefix}-left.uf2 && cp build/right/zephyr/zmk.uf2 ${file_prefix}-right.uf2
+    - cp build/left/zephyr/zmk.uf2 ${FILE_PREFIX}-left.uf2 && cp build/right/zephyr/zmk.uf2 ${FILE_PREFIX}-right.uf2
 
   artifacts:
     paths:
-      - ${file_prefix}-left.uf2
-      - ${file_prefix}-right.uf2
+      - *.uf2
