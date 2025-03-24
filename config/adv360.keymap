@@ -15,6 +15,23 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+/*
+ *
+ * Neo2 layout for Kinesis Advantage 360 Pro
+ *
+ * The general idea is to have three layers that can be toggled:
+ *
+ * – standard Neo2
+ * – poor man’s Neo2 ((partial) Neo2 with QWERTZ active on the host system)
+ * – poor man’s QWERTZ ((partial) QWERTZ with Neo2 active on the host system)
+ *
+ * Inspired by:
+ * - https://github.com/kaimi/tmk_keyboard/blob/neo2/keyboard/ergodox/keymap_neo.c
+ * - https://github.com/urob/zmk-config/blob/main/config/base.keymap
+ * - https://github.com/marlonrichert/raise-ergo
+ * - https://github.com/kucera-lukas/zmk-config
+ */
+
 #include <dt-bindings/zmk/stp.h>
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/backlight.h>
