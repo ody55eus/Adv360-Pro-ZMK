@@ -11,7 +11,7 @@
       - bootloader
       - zmk
 
-  before-script:
+  before_script:
     - timestamp=$(date +"%Y%m%d%H%M")
     - commit=$(echo "${{ github.sha }}" | cut -c1-7)
     - file_prefix=$timestamp-$commit
