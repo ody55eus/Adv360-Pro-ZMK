@@ -11,9 +11,38 @@
         #include "version.dtsi"
 
         // Sticky Keys
-        sk:sticky_keys {
+        skq: sticky_key_quick_release {
+            compatible = "zmk,behavior-sticky-key";
+            #binding-cells = <1>;
+            bindings = <&kp>;
             release-after-ms = <2000>;
             quick-release;
+            ignore-modifiers;
+        };
+
+        skh: sticky_key_hold {
+            compatible = "zmk,behavior-sticky-key";
+            #binding-cells = <1>;
+            bindings = <&kp>;
+            release-after-ms = <2000>;
+            /delete-property/ ignore-modifiers;
+        };
+        //
+        // Sticky Layers
+        slq: sticky_layer_quick_release {
+            compatible = "zmk,behavior-sticky-key";
+            #binding-cells = <1>;
+            bindings = <&mo>;
+            release-after-ms = <2000>;
+            quick-release;
+            ignore-modifiers;
+        };
+
+        slh: sticky_layer_hold {
+            compatible = "zmk,behavior-sticky-key";
+            #binding-cells = <1>;
+            bindings = <&mo>;
+            release-after-ms = <2000>;
             /delete-property/ ignore-modifiers;
         };
 
@@ -123,14 +152,14 @@
          * Hold
          *   Momentary (mo <1>)
          * Tap
-         *   Sticky Layer (sl <2>)
+         *   Sticky Layer (slq <2>)
          */
         mo_sl: behavior_mo_sl {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "hold-preferred";
             tapping-term-ms = <200>;
-            bindings = <&mo>, <&sl>;
+            bindings = <&mo>, <&slq>;
         };
 
         // lt_spc: Momentary Layer or Space Sticky Shift Macro
