@@ -1,8 +1,6 @@
  build:
   image: zmkfirmware/zmk-build-arm:stable
 
-  variables:
-
   cache:
     paths:
       - modules
