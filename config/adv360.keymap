@@ -754,14 +754,29 @@
     conditional_layers {
         compatible = "zmk,conditional-layers";
 
+        // Activate MacOS Specific HW_Mod3 Layer (10)
+        // If: Mod3 (6) && MacOS (8)
         MacOS_HW_Mod3 {
             if-layers = <6 8>;
             then-layer = <10>;
         };
 
+        // Activate Win Specific HW_Mod3 Layer (11)
+        // If: Mod3 (6) && Win (9)
         Win_HW_Mod3 {
             if-layers = <6 9>;
             then-layer = <11>;
+        };
+    };
+
+    combos {
+        compatible = "zmk,combos";
+
+        // Test Combo
+        combo_esc {
+            timeout-ms = <50>;
+            key-positions = <65 70>;
+            bindings = <&caps_word>;
         };
     };
 };
