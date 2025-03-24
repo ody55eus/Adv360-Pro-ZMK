@@ -30,5 +30,4 @@
 
   artifacts:
     paths:
-      - ${FILE_PREFIX}-left.uf2
-      - ${FILE_PREFIX}-right.uf2
+      - ./*.uf2
