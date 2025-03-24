@@ -23,9 +23,9 @@
     - west zephyr-export
 
   script:
-    - west build -s zmk/app -d build/left -b adv360_left -- -DZMK_CONFIG="${CI_BUILDS_DIR}/config"
+    - west build -s zmk/app -d build/left -b adv360_left -- -DZMK_CONFIG="${CI_PROJECT_DIR}/config"
     - grep -vE '(^#|^$)' build/left/zephyr/.config
-    - west build -s zmk/app -d build/right -b adv360_right -- -DZMK_CONFIG="${CI_BUILDS_DIR}/config"
+    - west build -s zmk/app -d build/right -b adv360_right -- -DZMK_CONFIG="${CI_PROJECT_DIR}/config"
     - grep -vE '(^#|^$)' build/right/zephyr/.config
     - cp build/left/zephyr/zmk.uf2 ${file_prefix}-left.uf2 && cp build/right/zephyr/zmk.uf2 ${file_prefix}-right.uf2
 
