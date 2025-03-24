@@ -191,8 +191,10 @@
             bindings = <&mo>, <&m_dot_spc>;
         };
 
+        // Tap Dance: tap multiple times for different outcomes
+
         /*
-         * Tap Dance 0 (td0): tap multiple times for different outcomes
+         * Tap Dance 0 (td0):
          *
          * Tap 1 (kp ESC)
          * Tap 2 (mo 2) (Neo)
@@ -208,7 +210,19 @@
             label = "TapDance-Neo-QWERT";
         };
 
-        // mod-morph
+        // Mod Tap (td_mt):
+        //
+        // Tap 1: ESC
+        // Tap 2: LCTRL
+        // Hold: LSHIFT
+        td_mt: tap_dance_mod_tap {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&htm LSHIFT ESC>, <&kp LCTRL>;
+        };
+
+        // mod-morph (Morphing Keys)
         //
         // From https://zmk.dev/docs/keymaps/behaviors/mod-morph
 
