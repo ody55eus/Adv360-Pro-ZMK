@@ -1,3 +1,18 @@
+  m_mouse: Macro_Mouse {
+    compatible = "zmk,behavior-macro-two-param";
+    #binding-cells = <2>;
+    bindings = <&macro_param_1to1>
+             , <&macro_press &mmv MACRO_PLACEHOLDER>
+	     , <&macro_param_2to1>
+             , <&macro_press &mmv MACRO_PLACEHOLDER>
+             , <&macro_wait_time 200>
+	     , <&macro_param_1to1>
+             , <&macro_release &mmv MACRO_PLACEHOLDER>
+	     , <&macro_param_2to1>
+             , <&macro_release &mmv MACRO_PLACEHOLDER>;
+    wait-ms = <0>;
+    tap-ms = <5>;
+  };
   m_mouse_up_left: Macro_Mouse_Up_Left {
     compatible = "zmk,behavior-macro";
     #binding-cells = <0>;
@@ -8,7 +23,9 @@
   m_mouse_up_right: Macro_Mouse_Up_Right {
     compatible = "zmk,behavior-macro";
     #binding-cells = <0>;
-    bindings = <&macro_press &mmv MOVE_UP &mmv MOVE_RIGHT>;
+    bindings = <&macro_press &mmv MOVE_UP &mmv MOVE_RIGHT>
+             , <&macro_wait_time 200>
+	     , <&macro_release &mmv MOVE_UP &mmv MOVE_RIGHT>;
     wait-ms = <0>;
     tap-ms = <5>;
   };
