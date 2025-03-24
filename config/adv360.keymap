@@ -11,7 +11,7 @@
         #include "version.dtsi"
 
         // Sticky Keys
-        &sk {
+        sk:sticky_keys {
             release-after-ms = <2000>;
             quick-release;
             /delete-property/ ignore-modifiers;
