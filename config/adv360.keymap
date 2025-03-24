@@ -360,6 +360,14 @@
                 <&htm RGUI LA(T)>, // Hold:  RGUI   Tap: M-w
                 <&htm RCTRL RC(SQT)>; // Hold: RCTL   Tap: C-y
         };
+
+
+    	prog_caps: prog_caps {
+       	    compatible = "zmk,behavior-caps-word";
+            #binding-cells = <0>;
+            continue-list = <UNDERSCORE MINUS BACKSPACE DELETE>;
+	}
+
     };
 
     keymap {
@@ -887,7 +895,7 @@
         combo_caps {
             timeout-ms = <50>;
             key-positions = <65 70>;
-            bindings = <&caps_word>;
+            bindings = <&prog_caps>;
         };
 
         // Other Combo (Thumbs)
