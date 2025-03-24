@@ -249,7 +249,7 @@
 &kp TAB          &kp Q       &kp W         &kp E          &kp R           &kp T   &lt 2 LC(R)                                                         &htm RIGHT_ALT LC(Q)  &kp Y   &kp U        &kp I       &kp O         &kp P          &kp BSLH
 &htm CAPS LA(T)  &hm LGUI A  &hm LSHIFT S  &hm LALT D     &hm LCTRL F     &kp G   &htm CAPS LA(H)  &kp LCTRL  &kp LALT      &kp LGUI       &kp RCTRL  &htm CAPS LA(Q)       &kp H   &hm RCTRL J  &hm RALT K  &hm RSHIFT L  &hm RGUI SEMI  &hm CAPS SQT
 &kp LSHFT        &kp Z       &kp X         &kp C          &kp V           &kp B                               &kp CAPS      &kp BACKSLASH                                   &kp N   &kp M        &kp COMMA   &kp DOT       &kp FSLH       &kp RSHFT
-&mo_sl 2 3       &td0        &tog 2        &mt CAPS LEFT  &mt LGUI RIGHT          &kp LSHIFT       &kp SPACE  &mo 2         &kp RIGHT_ALT  &kp ENTER  &kp RSHIFT                    &kp UP       &kp DOWN    &kp LBKT      &kp RBKT       &mo 3
+&mo_sl 2 3       &td0        &tog 2        &mt CAPS LEFT  &mt LGUI RIGHT          &kp LSHIFT       &lt_spc 2  &mo 2         &kp RIGHT_ALT  &kp ENTER  &kp RSHIFT                    &kp UP       &kp DOWN    &kp LBKT      &kp RBKT       &mo 3
             >;
         };
 
@@ -360,7 +360,7 @@
 &trans  &trans  &trans  &trans  &trans  &trans  &none                                                 &none   &trans  &trans  &trans  &trans   &trans   &trans
 &trans  &trans  &trans  &trans  &trans  &trans  &none      &trans      &trans      &kp K_APP  &trans  &none   &trans  &trans  &trans  &trans   &trans   &trans
 &trans  &trans  &trans  &trans  &trans  &trans                         &trans      &trans                     &trans  &trans  &trans  &trans   &trans   &trans
-&trans  &trans  &trans  &trans  &trans          &kp SPACE  &kp K_REDO  &trans      &trans     &trans  &trans          &trans  &trans  &trans   &trans   &trans
+&trans  &trans  &trans  &trans  &trans          &lt_spc 2  &kp K_REDO  &trans      &trans     &trans  &trans          &trans  &trans  &trans   &trans   &trans
             >;
         };
 
@@ -434,7 +434,7 @@
 &kp TAB    &kp P    &kp T     &kp F     &kp K      &kp L   &trans                                                       &trans     &kp B   &kp A      &kp S      &kp G     &kp V      &kp Z
 &mo 6      &kp D    &kp H     &kp SEMI  &kp O      &kp I   &trans    &kp LCTRL  &kp LALT      &kp LGUI       &kp RCTRL  &trans     &kp U   &kp SLASH  &kp Y      &kp E     &kp X      &kp C
 &kp LSHFT  &kp SQT  &kp Q     &kp R     &kp W      &kp N                        &kp CAPS      &kp BACKSLASH                        &kp J   &kp M      &kp COMMA  &kp DOT   &kp MINUS  &kp RSHFT
-&mo 0      &trans   &kp LGUI  &kp LEFT  &kp RIGHT          &kp BSPC  &kp DEL    &mo 2         &kp RIGHT_ALT  &kp ENTER  &kp SPACE          &kp UP     &kp DOWN   &kp LBKT  &kp RBKT   &mo 0
+&mo 0      &trans   &kp LGUI  &kp LEFT  &kp RIGHT          &m_bspc   &kp DEL    &mo 2         &kp RIGHT_ALT  &kp ENTER  &lt_spc 2          &kp UP     &kp DOWN   &kp LBKT  &kp RBKT   &mo 0
             >;
         };
 
