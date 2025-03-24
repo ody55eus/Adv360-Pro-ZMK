@@ -361,12 +361,11 @@
                 <&htm RCTRL RC(SQT)>; // Hold: RCTL   Tap: C-y
         };
 
-
     	prog_caps: prog_caps {
-       	    compatible = "zmk,behavior-caps-word";
+            compatible = "zmk,behavior-caps-word";
             #binding-cells = <0>;
             continue-list = <UNDERSCORE MINUS BACKSPACE DELETE>;
-	}
+	};
 
     };
 
