@@ -93,12 +93,26 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-unless-interrupted";
-            tapping-term-ms = <100>;                        // <---[[produces tap if held longer than tapping-term-ms]]
+            tapping-term-ms = <100>;   // how long a key must be pressed to trigger the "hold" behavior
+            quick-tap-ms = <200>;      // press key again within quick-tap-ms to tap
+            bindings = <&kp>, <&kp>;
+
+            // press any key not listed in hold-trigger-key-positions
+            // before tapping-term-ms expires, it will produce a tap
+            hold-trigger-key-positions = <41 42 43 44 45>;
+        };
+
+        rh_pht: right_positional_hold_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-unless-interrupted";
+            tapping-term-ms = <100>;
             quick-tap-ms = <200>;
             bindings = <&kp>, <&kp>;
 
-            hold-trigger-key-positions = <5 6 7 8 9 10>;    // <---[[right-hand keys]]
+            hold-trigger-key-positions = <29 30 31 32 33>;
         };
+
 
         /*
          * From https://zmk.dev/docs/keymaps/behaviors/hold-tap?examples=autoshift
@@ -286,7 +300,7 @@
             bindings = <
 &mo_tog 7 7      &kp N1      &kp N2        &kp N3         &kp N4          &kp N5  &mo_tog 1 1                                                         &mo 4                 &kp N6  &kp N7       &kp N8      &kp N9        &kp N0         &kp MINUS
 &kp TAB          &kp Q       &kp W         &kp E          &kp R           &kp T   &lt 2 LC(R)                                                           &htm RIGHT_ALT LC(Q)  &kp Y   &kp U        &kp I       &kp O         &kp P          &kp BSLH
-&htm CAPS LA(T)  &hm LGUI A  &hm LSHIFT S  &hm LALT D     &hm LCTRL F     &hm RALT G   &htm CAPS LA(H)  &kp LCTRL    &kp LALT      &kp LGUI       &kp RCTRL  &htm CAPS LA(Q)       &hm RALT H   &hm RCTRL J  &hm LALT K  &hm RSHIFT L  &hm RGUI SEMI  &hm CAPS SQT
+&htm CAPS LA(T)  &lh_pht LGUI A  &lh_pht LSHIFT S  &lh_pht LALT D     &lh_pht LCTRL F     &lh_pht RALT G   &htm CAPS LA(H)  &kp LCTRL    &kp LALT      &kp LGUI       &kp RCTRL  &htm CAPS LA(Q)       &rh_pht RALT H   &rh_pht RCTRL J  &rh_pht LALT K  &rh_pht RSHIFT L  &rh_pht RGUI SEMI  &rh_pht CAPS SQT
 &key_repeat      &kp Z       &kp X         &kp C          &kp V           &kp B                                 &kp CAPS      &kp BACKSLASH                                   &kp N   &kp M        &m_comma    &kp DOT       &kp FSLH       &htm RSHFT SPACE
 &mo_sl 2 3       &td0        &tog 2        &mt CAPS LEFT  &mt LGUI RIGHT          &htm LSHIFT BSPC   &kp SPACE    &mo 2         &kp RIGHT_ALT  &kp ENTER  &htm RSHIFT SPACE     &kp UP       &kp DOWN    &kp LBKT      &kp RBKT       &mo 3
             >;
@@ -358,7 +372,7 @@
         keypad {
             display-name = "Kp";
             bindings = <
-&td0         &kp N1     &kp N2    &kp N3        &kp N4        &kp N5      &trans                                       &mo 4         &kp LA(O)  &kp KP_NUM    &kp KP_EQUAL  &kp KP_DIVIDE  &kp KP_MULTIPLY   &kp MINUS
+&trans       &kp N1     &kp N2    &kp N3        &kp N4        &kp N5      &trans                                       &mo 4         &kp LA(O)  &kp KP_NUM    &kp KP_EQUAL  &kp KP_DIVIDE  &kp KP_MULTIPLY   &kp MINUS
 &kp TAB      &kp PG_UP  &m_bspc   &kp UP        &kp DEL       &kp PG_DN   &trans                                       &trans        &kp LC(U)  &kp KP_N7     &kp KP_N8     &kp KP_N9      &kp KP_MINUS      &kp BSLH
 &kp CAPS     &kp HOME   &kp LEFT  &kp DOWN      &kp RIGHT     &kp END     &trans  &trans  &trans      &trans  &trans   &trans        &kp LA(H)  &kp KP_N4     &kp KP_N5     &kp KP_N6      &kp KP_PLUS       &kp SQT
 &trans    &kp ESC    &kp TAB   &kp LG(V)     &kp RET       &kp K_UNDO                  &trans      &trans                         &kp COLON  &kp KP_N1     &kp KP_N2     &kp KP_N3      &kp KP_ENTER      &kp RSHFT
@@ -373,7 +387,7 @@
      * This is the function layer (Fn).
      *
      * ,--------------------------------------------------.           ,--------------------------------------------------.
-     * |  F1    | F2   | F3   | F4   | F5   | F6   | To5  |           | Mo 4 | F7   |  F8  |  F9  | F10  | F11  | F12    |
+     * |  F1    | F2   | F3   | F4   | F5   | F6   | QWERT|           | Mo 4 | F7   |  F8  |  F9  | F10  | F11  | F12    |
      * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
      * |  trans | trans| trans| trans| trans| trans| trans|           | trans| trans| trans| trans| trans| trans| trans  |
      * |--------+------+------+------+------+------|------|           |------|------+------+------+------+------+--------|
@@ -395,7 +409,7 @@
         fn {
             display-name = "Fn";
             bindings = <
-&kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6  &to 5                                                   &mo 4   &kp F7  &kp F8  &kp F9  &kp F10  &kp F11  &kp F12
+&kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6  &mo_tog 5 5                                                   &mo 4   &kp F7  &kp F8  &kp F9  &kp F10  &kp F11  &kp F12
 &trans  &trans  &trans  &trans  &trans  &trans  &none                                                   &none   &trans  &trans  &trans  &trans   &trans   &trans
 &trans  &trans  &trans  &trans  &trans  &trans  &none      &trans        &trans      &kp K_APP  &trans  &none   &trans  &trans  &trans  &trans   &trans   &trans
 &trans  &trans  &trans  &trans  &trans  &trans                           &trans      &trans                     &trans  &trans  &trans  &trans   &trans   &trans
