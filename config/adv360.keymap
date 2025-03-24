@@ -180,7 +180,7 @@
 
         // Tap: comma
         // Shift + tap: semicolon
-        /* Ctrl + shift + tap: <
+        // Ctrl + shift + tap: <
         m_inner_comma: morph_inner_comma {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
@@ -195,8 +195,8 @@
         };
 
         // Tap: Space
-        // s-   tap: dot               -> space -> sticky shift
-        // C-s- tap: exclamation point -> space -> sticky shift
+        // Shift tap: dot              -> space -> sticky shift
+        // C-sft-tap: Space
         m_excl_spc: morph_excl_space {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
@@ -208,7 +208,7 @@
             #binding-cells = <0>;
             bindings = <&kp SPC>, <&m_excl_spc>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
-        };*/
+        };
 
     };
 
