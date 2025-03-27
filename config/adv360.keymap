@@ -140,7 +140,7 @@
         /*
          * cross-hand only modifiers, using tap-unless-interrupted and positional hold-tap (hold-trigger-key-positions)
          */
-	 
+
         lh_pht: left_positional_hold_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -468,11 +468,11 @@
         neo_layer {
             display-name = "Neo";
             bindings = <
-&kp EQUAL    &kp N1    &kp N2     &kp N3    &kp N4     &kp N5  &trans                                      &mo 4   &kp N6  &kp N7  &kp N8     &kp N9    &kp N0    &kp MINUS
-&kp TAB      &kp X     &kp V      &kp L     &kp C      &kp W   &mo 2                                       &mo 2   &kp K   &kp H   &kp G      &kp F     &kp Q     &kp BSLH
-&mo 6        &kp U     &kp I      &kp A     &kp E      &kp O   &mo 6   &trans  &trans      &trans  &trans  &mo 6   &kp S   &kp N   &kp R      &kp T     &kp D     &kp Y
-&kp LSHFT    &kp LBKT  &kp SLASH  &kp SEMI  &kp P      &kp Z                   &mo 6       &mo 6                   &kp B   &kp M   &kp COMMA  &kp DOT   &kp J     &kp RSHFT
-&mo_sl 2 3   &kp ESC   &mo_sl 2 2 &kp LEFT  &kp RIGHT          &trans  &trans  &mo 2       &mo 2   &trans  &trans          &kp UP  &kp DOWN   &kp LBKT  &kp RBKT  &trans
+&kp EQUAL    &kp N1    &kp N2      &kp N3    &kp N4     &kp N5  &trans                                      &mo 4   &kp N6  &kp N7  &kp N8     &kp N9    &kp N0    &kp MINUS
+&kp TAB      &kp X     &kp V       &kp L     &kp C      &kp W   &mo 2                                       &mo 2   &kp K   &kp H   &kp G      &kp F     &kp Q     &kp BSLH
+&mo 6        &kp U     &kp I       &kp A     &kp E      &kp O   &mo 6   &trans  &trans      &trans  &trans  &mo 6   &kp S   &kp N   &kp R      &kp T     &kp D     &kp Z
+&kp LSHFT    &kp LBKT  &kp SLASH   &kp SEMI  &kp P      &kp Y                   &mo 6       &mo 6                   &kp B   &kp M   &kp COMMA  &kp DOT   &kp J     &kp RSHFT
+&mo_sl 2 3   &kp ESC   &mo_sl 2 2  &kp LEFT  &kp RIGHT          &trans  &trans  &mo 2       &mo 2   &trans  &trans          &kp UP  &kp DOWN   &kp LBKT  &kp RBKT  &trans
             >;
         };
 
@@ -654,9 +654,9 @@
             display-name = "HWLayer3";
             bindings = <
 &trans  &trans     &trans     &trans    &trans     &trans     &trans                                      &mo 4   &trans     &trans     &trans    &trans     &trans     &trans
-&trans  &kp UNDER  &kp UNDER  &kp LBKT  &kp RBKT   &kp CARET  &trans                                      &trans  &kp EXCL   &kp LT     &kp GT    &kp EQUAL  &kp AMPS   &trans
-&trans  &kp BSLH   &kp FSLH   &kp LBRC  &kp RBRC   &kp STAR   &trans  &none   &none       &trans  &none   &trans  &kp QMARK  &kp LPAR   &kp RPAR  &kp MINUS  &kp COLON  &kp AT
-&trans  &kp POUND  &kp DLLR   &kp PIPE  &kp TILDE  &kp GRAVE                  &none       &none                   &kp PLUS   &kp PRCNT  &kp DQT   &kp SQT    &kp SEMI   &trans
+&trans  &kp UNDER  &kp QMARK  &kp LBKT  &kp RBKT   &kp CARET  &trans                                      &trans  &kp EXCL   &kp LT     &kp GT    &kp RPAR   &kp CARET  &trans
+&trans  &kp BSLH   &kp AMPS   &kp STAR  &kp LPAR   &kp RBRC   &trans  &none   &none       &trans  &none   &trans  &kp UNDER  &kp LPAR   &kp RPAR  &kp FSLH   &kp GT     &kp AT
+&trans  &kp BSLH   &kp DLLR   &kp PIPE  &kp TILDE  &kp GRAVE                  &none       &none                   &kp RBKT   &kp PRCNT  &kp AT    &kp SQT    &kp LT     &trans
 &trans  &trans     &trans     &trans    &trans                &trans  &trans  &trans      &trans  &trans  &trans             &trans     &trans    &trans     &trans     &trans
             >;
         };
