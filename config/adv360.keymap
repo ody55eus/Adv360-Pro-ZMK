@@ -506,9 +506,9 @@
             display-name = "Kp";
             bindings = <
 &trans       &kp N1     &kp N2    &kp N3        &kp N4        &kp N5      &trans                                       &mo 4         &kp LA(O)  &kp KP_NUM    &kp KP_EQUAL  &kp KP_DIVIDE  &kp KP_MULTIPLY   &kp MINUS
-&kp TAB      &kp PG_UP  &m_bspc   &kp UP        &kp DEL       &kp PG_DN   &trans                                       &trans        &kp LC(U)  &kp KP_N7     &kp KP_N8     &kp KP_N9      &kp KP_MINUS      &kp BSLH
-&kp CAPS     &kp HOME   &kp LEFT  &kp DOWN      &kp RIGHT     &kp END     &trans  &trans  &trans      &trans  &trans   &trans        &kp LA(H)  &kp KP_N4     &kp KP_N5     &kp KP_N6      &kp KP_PLUS       &kp SQT
-&trans       &kp ESC    &kp TAB   &kp LG(V)     &kp RET       &kp K_UNDO                  &trans      &trans                         &kp COLON  &kp KP_N1     &kp KP_N2     &kp KP_N3      &kp KP_ENTER      &kp RSHFT
+&kp TAB      &kp PG_UP  &m_bspc   &kp UP        &kp DEL       &kp PG_DN   &trans                                       &trans        &kp LC(U)  &kp N7     &kp N8     &kp N9      &kp KP_MINUS      &kp BSLH
+&kp CAPS     &kp HOME   &kp LEFT  &kp DOWN      &kp RIGHT     &kp END     &trans  &trans  &trans      &trans  &trans   &trans        &kp LA(H)  &kp N4     &kp N5     &kp N6      &kp KP_PLUS       &kp SQT
+&trans       &kp ESC    &kp TAB   &kp LG(V)     &kp RET       &kp K_UNDO                  &trans      &trans                         &kp COLON  &kp N1     &kp N2     &kp N3      &kp KP_ENTER      &kp RSHFT
 &mo_tog 7 5  &mo 6      &trans    &kp C_BRI_DN  &kp C_BRI_UP              &trans  &trans  &trans      &trans  &kp DEL  &kp NUMBER_0             &kp C_VOL_UP  &kp C_VOL_DN  &kp C_MUTE     &kp K_PLAY_PAUSE  &trans
             >;
         };
